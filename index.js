@@ -2,21 +2,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+
 //importing routers in index.js
 const usersRoute = require('./routes/usersRoute');
-
 app.use('/api/users', usersRoute);
 
 const mechanicsRoute = require('./routes/mechanicsRoute');
-
 app.use('/api/mechanics', mechanicsRoute);
 
 const appointmentsRoute = require('./routes/appointmentsRoute');
-
 app.use('/api/appointments', appointmentsRoute);
 
 const progressRoute = require('./routes/progressRoute');
-
 app.use('/api/progress', progressRoute);
 
 /*Next, add middleware to your application. Middleware is software that lies between an operating 
@@ -40,7 +37,7 @@ pool.connect()
 
 // example route; Define your API endpoints. These are the routes that your client-side code will use to interact with your server and database.
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('Landing Page');
 });
 
 app.get('/signin', (req, res) => {

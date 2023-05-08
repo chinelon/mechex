@@ -27,38 +27,87 @@ pool.connect()
 
 // example route; Define your API endpoints. These are the routes that your client-side code will use to interact with your server and database.
 usersRoute.get('/', (req, res) => {
-    // Your code to retrieve all users from the database
-    res.send('This is the response for GET /users');
+    /* Your code to retrieve all users from the database
+    res.send('This is the response for GET /users');*/
+    pool.query('SELECT * FROM public.users ORDER BY id ASC', (error, results) => {
+        if (error) {
+            console.log(Hello)
+        } else {
+            res.status(200).json(results.rows)
+        }
+    });
 });
 
 // GET /users/:id - Get a user by ID
 usersRoute.get('/:id', (req, res) => {
-    const userId = req.params.id;
-    // Your code to retrieve a user by ID from the database
-    res.send(`This is the response for GET /users/${userId}`);
+    /*const userId = req.params.id;
+     code to retrieve a user by ID from the database
+    res.send(`This is the response for GET /users/${userId}`);*/
+    const id = parseInt(req.params.id)
+
+    pool.query('SELECT * FROM public.users WHERE id = $1', [id], (error, results) => {
+        if (error) {
+            console.log(error)
+        } else {
+            res.status(200).json(results.rows)
+        }
+    });
+
 });
 
 // POST /users - Create a new user to be deleted
 usersRoute.post('/', (req, res) => {
-    // Your code to create a new user in the database
-    res.send('This is the response for POST /users');
+    /* Your code to create a new user in the database
+    res.send('This is the response for POST /users');*/
+    const { username, password, email, phone_no } = req.body
+
+    pool.query('INSERT INTO public.users (username, password, email, phone_no) VALUES ($1, $2) RETURNING *', [username, password, email, phone_no], (error, results) => {
+        if (error) {
+            console.log(error)
+        } else {
+            res.status(201).send(`User added with ID: ${results.rows[0].id}`)
+        }
+    });
 });
 
 // PUT /users/:id - Update a user by ID
 usersRoute.put('/:id', (req, res) => {
-    const userId = req.params.id;
-    // Your code to update a user by ID in the database
-    res.send(`This is the response for PUT /users/${userId}`);
+    /*const userId = req.params.id;
+      Your code to update a user by ID in the database
+     res.send(`This is the response for PUT /users/${userId}`);*/
+    const id = parseInt(req.params.id)
+    const { username, password, email, phone_no } = req.body
+
+    pool.query(
+        'UPDATE public.users SET username = $1, password = $2, email = $3, phone_no = $4  WHERE id = $5',
+        [username, password, email, phone_no, id],
+        (error, results) => {
+            if (error) {
+                console.log(error)
+            }
+            res.status(200).send(`User modified with ID: ${id}`)
+        }
+    );
 });
 
 // DELETE /users/:id - Delete a user by ID
 usersRoute.delete('/:id', (req, res) => {
-    const userId = req.params.id;
+    /*const userId = req.params.id;
     // Your code to delete a user by ID from the database
-    res.send(`This is the response for DELETE /users/${userId}`);
+    res.send(`This is the response for DELETE /users/${userId}`);*/
+    const id = parseInt(req.params.id)
+
+    pool.query('DELETE FROM public.users WHERE id = $1', [id], (error, results) => {
+        if (error) {
+            console.log(error)
+        }
+        res.status(200).send(`User deleted with ID: ${id}`)
+    });
 });
 
-module.exports = usersRoute;
+module.exports = 
+    usersRoute
+;
 
 // Add the users router to the app
 app.use('/users', usersRoute);
