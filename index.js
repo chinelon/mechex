@@ -2,6 +2,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const path = require('path');
+
 
 //importing routers in index.js
 const usersRoute = require('./routes/usersRoute');
@@ -47,6 +49,12 @@ app.get('/signin', (req, res) => {
 app.get('/login', (req, res) => {
     res.send('you are logged in!');
 });
+
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
 
 const PORT = process.env.PORT || 5001;
 
