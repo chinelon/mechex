@@ -1,10 +1,12 @@
 
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function BookApp() {
   const [user, setUser] = useState('');
-  const [mechanic, setMechanic] = useState('');
-  const [date, setDate] = useState('');
+  const [mechanics, setMechanics] = useState([]);
+  const [address, setAddress] = useState('');
+  //const [date, setDate] = useState('');
   const [appointment_date, setAppointment_Date] = useState('');
   const [vehicle_make, setVehicle_Make] = useState('');
   const [vehicle_model, setVehicle_Model] = useState('');
@@ -15,6 +17,14 @@ function BookApp() {
     setUser(event.target.value);
   };
 
+  const handleAddressChange = (event) => {
+    setAddress(event.target.value);
+  };
+
+  const handleDateChange = (event) => {
+    setAppointment_Date(event.target.value);
+  };
+  
   const handleMakeChange = (event) => {
     setVehicle_Make(event.target.value);
   };
@@ -31,8 +41,16 @@ function BookApp() {
     setVehicle_Description(event.target.value);
   };
 
-  const handleDateChange = (event) => {
-    setDate(event.target.value);
+  //ghis code handles the search for mechanics 
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get(`/api/mechanics/${address}`);
+      const mechanics = response.data;
+      console.log(mechanics)
+      setMechanics(mechanics);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleSubmit = (event) => {
@@ -44,6 +62,26 @@ function BookApp() {
     <div>
       <h2>Book Appointment</h2>
       <form onSubmit={handleSubmit}>
+        
+        <div><input
+          type="text"
+          placeholder="Enter location"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+        />
+          <button onClick={handleSearch}>Search</button>
+
+          {/* Render the mechanics' information */}
+      {mechanics.map((mechanic) => (
+        <div key={mechanic.id}>
+          <p>Name: {mechanic.name}</p>
+          <p>Address: {mechanic.address}</p>
+          {/* Additional mechanic information */}
+        </div>
+      ))}
+        </div>
+        
+        
         <div>
           <label htmlFor="date">Appointment Date: </label>
           <input type="date" id="appointment_date" value={appointment_date} placeholder='10/11/2033' onChange={handleDateChange} />

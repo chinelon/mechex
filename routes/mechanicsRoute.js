@@ -2,10 +2,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const cors = require('cors');
 
 // Define routes for the users resource
 const mechanicsRoute = express.Router();
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -27,8 +29,8 @@ pool.connect()
 
 // example route; Define your API endpoints. These are the routes that your client-side code will use to interact with your server and database.
 mechanicsRoute.get('/', (req, res) => {
-    /* Your code to retrieve all users from the database
-    res.send('This is the response for GET /users');*/
+    //Your code to retrieve all users from the database
+    res.send('This is the response for GET /users');
     pool.query('SELECT * FROM public.mechanics ORDER BY id ASC', (error, results) => {
         if (error) {
             console.log(error)
@@ -38,6 +40,39 @@ mechanicsRoute.get('/', (req, res) => {
     });
 });
 
+/*
+//gets/searches for mechanics based on their address
+mechanicsRoute.get('/api/mechanics', async (req, res) => {
+    const { address } = req.query;
+  
+    try {
+      // Query the database for mechanics with a matching address
+      const mechanics = await Mechanic.find({ address });
+      res.json(mechanics);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });*/
+  
+//get mechanics by address
+  mechanicsRoute.get('/api/mechanics/:address', (req, res) => {
+    /* const mechanicId = req.params.id;
+      code to retrieve a user by ID from the database
+     res.send(`This is the response for GET /users/${userId}`);*/
+     const address = req.params.address
+        console.log(address)
+ 
+     pool.query('SELECT * FROM public.mechanics WHERE "address" LIKE $1', ['%address'], (error, results) => {
+        if (error) {
+          console.log(error);
+        } else {
+          res.status(200).json(results.rows);
+        }
+      });
+      
+ 
+ });  
 // GET /users/:id - Get a user by ID
 mechanicsRoute.get('/:id', (req, res) => {
    /* const mechanicId = req.params.id;
@@ -56,12 +91,13 @@ mechanicsRoute.get('/:id', (req, res) => {
 });
 
 // POST /users - Create a new user to be deleted
-mechanicsRoute.post('/', (req, res) => {
+mechanicsRoute.post('/signups', (req, res) => {
     /* Your code to create a new user in the database
     res.send('This is the response for POST /users');*/
     const { name, phone, email, address, password } = req.body
+    console.log(name, phone, email, address, password);
 
-    pool.query('INSERT INTO public.mechanics (name, phone, email, address, password) VALUES ($1, $2) RETURNING *', [name, phone, email, address, password], (error, results) => {
+    pool.query('INSERT INTO public.mechanics (name, phone, email, address, password) VALUES ($1, $2, $3, $4, $5) RETURNING *', [name, phone, email, address, password], (error, results) => {
         if (error) {
             console.log(error)
         } else {

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
-function TrackProg() {
+function TrackProg({ progress }) {
   const [progressData, setProgressData] = useState([]);
 
-  useEffect(() => {
-    /*fetch('/progress') // replace with your server route to retrieve progress data
-      .then(response => response.json())
-      .then(data => setProgressData(data))
-      .catch(error => console.log(error));*/
-  }, []);
+  //useEffect(() => {
+  /*fetch('/progress') // replace with your server route to retrieve progress data
+    .then(response => response.json())
+    .then(data => setProgressData(data))
+    .catch(error => console.log(error));*/
+  // }, []);
 
   // render progress data
   return (
@@ -24,6 +24,7 @@ function TrackProg() {
         ))}
       </ul>
     </div>
+
 
   );
 }

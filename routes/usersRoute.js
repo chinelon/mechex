@@ -2,10 +2,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const cors = require('cors');
 
 // Define routes for the users resource
 const usersRoute = express.Router();
-
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -56,12 +57,13 @@ usersRoute.get('/:id', (req, res) => {
 });
 
 // POST /users - Create a new user to be deleted
-usersRoute.post('/', (req, res) => {
+usersRoute.post('/signup', (req, res) => {
     /* Your code to create a new user in the database
     res.send('This is the response for POST /users');*/
     const { username, password, email, phone_no } = req.body
+    console.log(username, password, email, phone_no);
 
-    pool.query('INSERT INTO public.users (username, password, email, phone_no) VALUES ($1, $2) RETURNING *', [username, password, email, phone_no], (error, results) => {
+    pool.query('INSERT INTO public.users (username, password, email, phone_no) VALUES ($1, $2, $3, $4) RETURNING *', [username, password, email, phone_no], (error, results) => {
         if (error) {
             console.log(error)
         } else {

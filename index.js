@@ -50,6 +50,7 @@ app.get('/login', (req, res) => {
     res.send('you are logged in!');
 });
 
+  
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('*', (req, res) => {
