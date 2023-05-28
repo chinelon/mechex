@@ -55,17 +55,18 @@ mechanicsRoute.get('/api/mechanics', async (req, res) => {
     }
   });*/
   
-//get mechanics by address
-  mechanicsRoute.get('/api/mechanics/:address', (req, res) => {
+//get mechanics by their city
+  mechanicsRoute.get('/:city', (req, res) => {
     /* const mechanicId = req.params.id;
       code to retrieve a user by ID from the database
      res.send(`This is the response for GET /users/${userId}`);*/
-     const address = req.params.address
-        console.log(address)
+     const city = req.params.city
+        console.log(city)
  
-     pool.query('SELECT * FROM public.mechanics WHERE "address" LIKE $1', ['%address'], (error, results) => {
+     pool.query('SELECT * FROM public.mechanics WHERE "city" LIKE $1', [`%${city}%`], (error, results) => {
         if (error) {
           console.log(error);
+         res.status(500).json({ error: 'An error occurred while fetching mechanics' });
         } else {
           res.status(200).json(results.rows);
         }
@@ -94,10 +95,10 @@ mechanicsRoute.get('/:id', (req, res) => {
 mechanicsRoute.post('/signups', (req, res) => {
     /* Your code to create a new user in the database
     res.send('This is the response for POST /users');*/
-    const { name, phone, email, address, password } = req.body
+    const { name, phone, email, address, city, password, user_type } = req.body
     console.log(name, phone, email, address, password);
 
-    pool.query('INSERT INTO public.mechanics (name, phone, email, address, password) VALUES ($1, $2, $3, $4, $5) RETURNING *', [name, phone, email, address, password], (error, results) => {
+    pool.query('INSERT INTO public.mechanics (name, phone, email, address, city, password, user_type) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *', [name, phone, email, address, city, password, user_type], (error, results) => {
         if (error) {
             console.log(error)
         } else {
@@ -112,11 +113,11 @@ mechanicsRoute.put('/:id', (req, res) => {
       Your code to update a user by ID in the database
      res.send(`This is the response for PUT /users/${userId}`);*/
     const id = parseInt(req.params.id)
-    const { name, phone, email, address } = req.body
+    const { name, phone, email, address, city, user_type } = req.body
 
     pool.query(
-        'UPDATE public.mechanics SET name = $1, phone = $2, email = $3, password = $4, address = $5  WHERE id = $6',
-        [name, phone, email, address, password, id],
+        'UPDATE public.mechanics SET name = $1, phone = $2, email = $3, address = $4, city = $5, password = $6, user_type = $7 WHERE id = $6',
+        [name, phone, email, address, city, password,  user_type, id],
         (error, results) => {
             if (error) {
                 console.log(error)

@@ -60,10 +60,10 @@ usersRoute.get('/:id', (req, res) => {
 usersRoute.post('/signup', (req, res) => {
     /* Your code to create a new user in the database
     res.send('This is the response for POST /users');*/
-    const { username, password, email, phone_no } = req.body
-    console.log(username, password, email, phone_no);
+    const { username, password, email, phone_no, user_type } = req.body
+    console.log(username, password, email, phone_no, user_type);
 
-    pool.query('INSERT INTO public.users (username, password, email, phone_no) VALUES ($1, $2, $3, $4) RETURNING *', [username, password, email, phone_no], (error, results) => {
+    pool.query('INSERT INTO public.users (username, password, email, phone_no, user_type) VALUES ($1, $2, $3, $4, $5) RETURNING *', [username, password, email, phone_no, user_type], (error, results) => {
         if (error) {
             console.log(error)
         } else {

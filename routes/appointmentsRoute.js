@@ -2,10 +2,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const cors = require('cors');
 
 // Define routes for the users resource
 const appointmentsRoute = express.Router();
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -53,13 +55,13 @@ appointmentsRoute.get('/:id', (req, res) => {
 
 });
 
-// POST /users - Create a new user to be deleted
+// POST /users - Create a new appointment
 appointmentsRoute.post('/', (req, res) => {
-    /* Your code to create a new user in the database
+    /* Your code to create a new appointment in the database
     res.send('This is the response for POST /users');*/
-    const { appointment_date, vehicle_make, vehicle_model, vehicle_year, vehicle_description } = req.body
+    const { mechanic_id, appointment_date, vehicle_make, vehicle_model, vehicle_year, vehicle_description } = req.body
 
-    pool.query('INSERT INTO public.appointments (appointment_date, vehicle_make, vehicle_model, vehicle_year, vehicle_description) VALUES ($1, $2) RETURNING *', [appointment_date, vehicle_make, vehicle_model, vehicle_year, vehicle_description], (error, results) => {
+    pool.query('INSERT INTO public.appointments (mechanic_id, appointment_date, vehicle_make, vehicle_model, vehicle_year, vehicle_description) VALUES ($1, $2, $3, $4, $5, $6 ) RETURNING *', [mechanic_id, appointment_date, vehicle_make, vehicle_model, vehicle_year, vehicle_description], (error, results) => {
         if (error) {
             console.log(error)
         } else {

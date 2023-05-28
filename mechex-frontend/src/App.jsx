@@ -3,17 +3,18 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { } from 'react-router-dom';
 import './App.css';
-import BookApp from './components/BookApp';
-import ViewApp from './components/ViewApp';
-import TrackProg from './components/TrackProg';
+import BookApp from './components/customers/BookApp';
+import ViewApp from './components/customers/ViewApp';
+import TrackProg from './components/customers/TrackProg';
 import Navbar from './components/Navbar';
-import Dashboard from './components/Dashboard';
+import Dashboard from './components/customers/Dashboard';
 import About from './components/about';
 import LandPage from './components/LandPage';
-import Signup from './components/Signup';
-import Signups from './components/Signups';
+import Signup from './components/customers/Signup';
+import Signups from './components/mechanics/Signups';
 import Login from './components/Login';
-import Dashboards from './components/Dashboards';
+import Dashboards from './components/mechanics/Dashboards';
+import FollowUp from './components/mechanics/FollowUp';
 
 function App() {
   const [appointments, setAppointments] = useState([]);
@@ -59,6 +60,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/signups" element={<Signups />} />
+          <Route path="/follow-up" element={<FollowUp />} />
         </Routes>
       </div>
     </Router>

@@ -1,12 +1,23 @@
+import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function ViewApp() {
+  const { userId } = useParams();
   const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
-    // Code to fetch appointments data from the server
-    // and update the appointments state
-  }, []);
+    const fetchAppointments = async () => {
+      try {
+        const response = await axios.get(`/users/${userId}/appointments`);
+        setAppointments(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchAppointments();
+  }, [userId]);
 
   return (
     <div>

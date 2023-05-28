@@ -9,6 +9,7 @@ function Signup() {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+    const [usertype, setUserType] = useState('customer')
     const navigate = useNavigate();
 
 
@@ -26,6 +27,7 @@ function Signup() {
                 password,
                 email,
                 phone_no: phone,
+                user_type: usertype
             });
 
             // Handle the response from the backend as needed
@@ -36,6 +38,7 @@ function Signup() {
             setPassword('');
             setEmail('');
             setPhone('');
+            setUserType('');
 
             navigate('/dashboard');
         } catch (error) {
@@ -52,6 +55,17 @@ function Signup() {
         <div>
             <h2>Signup</h2>
             <form onSubmit={handleSubmit}>
+                <div>
+                    <label htmlFor="usertype">What kind of user are you?:</label>
+                    <select
+                        id="usertype"
+                        value={usertype}
+                        onChange={(e) => setUserType(e.target.value)}
+                    >
+                        <option value="customer">Customer</option>
+                        <option value="mechanic">Mechanic</option>
+                    </select>
+                </div>
                 <div>
                     <label htmlFor="username">Username:</label>
                     <input

@@ -3,6 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
+const cors = require('cors');
+
 
 
 //importing routers in index.js
@@ -22,6 +24,7 @@ app.use('/api/progress', progressRoute);
 system and the applications running on it, and is used to manage network resources and other aspects of the system.*/
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
 //Set up a connection to your database by adding the following code to your index.js file:
 const { Pool } = require('pg');
@@ -46,9 +49,40 @@ app.get('/signin', (req, res) => {
     res.send('you are signed in!');
 });
 
-app.get('/login', (req, res) => {
-    res.send('you are logged in!');
-});
+app.post('/login', async (req, res) => {
+
+    const { email, password } = req.body
+    console.log( email, password );
+
+    try {
+        // Query the customers table
+        const userQuery = 'SELECT * FROM users WHERE email = $1 AND password = $2';
+        const userResult = await pool.query(userQuery, [email, password]);
+    
+        if (userResult.rows.length > 0) {
+          // User is a customer
+          res.json({ success: true, userType: 'customer' });
+          return;
+        }
+    
+        // Query the mechanics table
+        const mechanicQuery = 'SELECT * FROM mechanics WHERE email = $1 AND password = $2';
+        const mechanicResult = await pool.query(mechanicQuery, [email, password]);
+    
+        if (mechanicResult.rows.length > 0) {
+          // User is a mechanic
+          res.json({ success: true, userType: 'mechanic' });
+          return;
+        }
+    
+        // User not found in either table
+        res.json({ success: false });
+      } catch (error) {
+        console.error('Error during login:', error);
+        res.status(500).json({ success: false, error: 'An error occurred during login' });
+      }
+    });
+
 
   
 app.use(express.static(path.join(__dirname, 'build')));

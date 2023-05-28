@@ -2,10 +2,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const cors = require('cors');
 
 // Define routes for the users resource
 const progressRoute = express.Router();
 
+
+//fixes the error '[Error] Origin http://127.0.0.1:5173 is not allowed by Access-Control-Allow-Origin. Status code: 200'
+app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -59,9 +63,9 @@ progressRoute.get('/:id', (req, res) => {
 progressRoute.post('/', (req, res) => {
     /* Your code to create a new user in the database
     res.send('This is the response for POST /users');*/
-    const { description, status } = req.body
+    const {  status, description, notes } = req.body
 
-    pool.query('INSERT INTO public.progress (description, status) VALUES ($1, $2) RETURNING *', [description, status], (error, results) => {
+    pool.query('INSERT INTO public.progress (status, description,  notes) VALUES ($1, $2, $3) RETURNING *', [ status, description, notes], (error, results) => {
         if (error) {
             console.log(error)
         } else {

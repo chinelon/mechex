@@ -9,7 +9,10 @@ function Signups() {
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
   const [password, setPassword] = useState('');
+  const [usertype, setUserType] = useState('mechanic');
+
   const navigate = useNavigate()
 
 
@@ -27,7 +30,9 @@ function Signups() {
         phone,
         email,
         address,
+        city,
         password,
+        user_type: usertype
       });
 
       // Handle the response from the backend as needed
@@ -38,7 +43,9 @@ function Signups() {
       setPhone('');
       setEmail('');
       setAddress('');
+      setCity('');
       setPassword('');
+      setUserType('');
 
       navigate('/dashboards');
     } catch (error) {
@@ -55,6 +62,17 @@ function Signups() {
       <h2>Welcome to our Mechanic Party!</h2>
       <form onSubmit={handleSubmit}>
         <div>
+          <div>
+            <label htmlFor="usertype">What kind of user are you?:</label>
+            <select
+              id="usertype"
+              value={usertype}
+              onChange={(e) => setUserType(e.target.value)}
+            >
+              <option value="customer">Customer</option>
+              <option value="mechanic">Mechanic</option>
+            </select>
+          </div>
           <label htmlFor="name">Name:</label>
           <input
             type="text"
@@ -85,13 +103,23 @@ function Signups() {
           />
         </div>
         <div>
-          <label htmlFor="address">Address:</label>
+          <label htmlFor="address">Street Address:</label>
           <input
             type="address"
             id="address"
-            placeholder='12, Brimsdale road, Ajegunle'
+            placeholder='12, Brimsdale road'
             value={address}
             onChange={(e) => setAddress(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="city">City:</label>
+          <input
+            type="city"
+            id="city"
+            placeholder='Ikeja'
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
           />
         </div>
         <div>
