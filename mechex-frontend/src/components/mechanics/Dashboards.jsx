@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-
 function Dashboards() {
+
     return (
         <div className='dashboard'>
             <div>

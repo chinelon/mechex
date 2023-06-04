@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function BookApp() {
+function BookApp({user_id}) {
   //const [user, setUser] = useState('');
   const [mechanics, setMechanics] = useState([]);
   const [city, setCity] = useState('');
@@ -14,10 +14,7 @@ function BookApp() {
   const [vehicle_description, setVehicle_Description] = useState('');
   const navigate = useNavigate()
 
-  /* const handleUserChange = (event) => {
-     setUser(event.target.value);
-   };*/
-
+  //const [user_id, setUser_Id] = useState(""); // Store the logged-in user ID here
 
   const handleSearch = async () => {
     try {
@@ -36,7 +33,12 @@ function BookApp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  console.log(user_id)
+   
+  if (!user_id) {
+      alert('Please log in to create an appointment');
+      return;
+    }
     //const mechanic_id = selectedMechanic;
     // Retrieve the selected mechanic's information and continue with form submission
     if (selectedMechanic) {
@@ -48,27 +50,29 @@ function BookApp() {
         // Send a POST request to your backend API endpoint
 
         const response = await axios.post('http://localhost:5004/appointments', {
+          user_id: user_id,
           mechanic_id: selectedMechanic,
           appointment_date,
           vehicle_make,
           vehicle_model,
           vehicle_year,
           vehicle_description,
+
         });
 
         // Handle the response from the backend as needed
         console.log(response.data);
 
         // Reset form fields after successful signup
-        setMechanics('');
+        setMechanics([]);
         setCity('');
         setSelectedMechanic('');
         setAppointment_Date('');
         setVehicle_Make('');
-        setVehicle_Make('');
-        setVehicle_Year('');
+        setVehicle_Model('');
         setVehicle_Year('');
         setVehicle_Description('');
+        //setUser_Id('');
 
         navigate('/appointments');
       } catch (error) {

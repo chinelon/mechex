@@ -40,9 +40,9 @@ appointmentsRoute.get('/', (req, res) => {
 
 // GET /users/:id - Get a user by ID
 appointmentsRoute.get('/:id', (req, res) => {
-   /* const mechanicId = req.params.id;
-     code to retrieve a user by ID from the database
-    res.send(`This is the response for GET /users/${userId}`);*/
+    /* const mechanicId = req.params.id;
+      code to retrieve a user by ID from the database
+     res.send(`This is the response for GET /users/${userId}`);*/
     const id = parseInt(req.params.id)
 
     pool.query('SELECT * FROM public.appointments WHERE id = $1', [id], (error, results) => {
@@ -59,17 +59,38 @@ appointmentsRoute.get('/:id', (req, res) => {
 appointmentsRoute.post('/', (req, res) => {
     /* Your code to create a new appointment in the database
     res.send('This is the response for POST /users');*/
-    const { mechanic_id, appointment_date, vehicle_make, vehicle_model, vehicle_year, vehicle_description } = req.body
+    const { user_id, mechanic_id, appointment_date, vehicle_make, vehicle_model, vehicle_year, vehicle_description } = req.body
 
-    pool.query('INSERT INTO public.appointments (mechanic_id, appointment_date, vehicle_make, vehicle_model, vehicle_year, vehicle_description) VALUES ($1, $2, $3, $4, $5, $6 ) RETURNING *', [mechanic_id, appointment_date, vehicle_make, vehicle_model, vehicle_year, vehicle_description], (error, results) => {
+    pool.query('INSERT INTO public.appointments (user_id, mechanic_id, appointment_date, vehicle_make, vehicle_model, vehicle_year, vehicle_description) VALUES ($1, $2, $3, $4, $5, $6, $7 ) RETURNING *', [user_id, mechanic_id, appointment_date, vehicle_make, vehicle_model, vehicle_year, vehicle_description], (error, results) => {
         if (error) {
             console.log(error)
+
+        } else if (!user_id ) {
+            return res.status(400).json({ error: 'Invalid userId' });
         } else {
             res.status(201).send(`Appoinmtent added with ID: ${results.rows[0].id}`)
         }
     });
 });
 
+appointmentsRoute.get('/user/:storedUserId', (req, res) => {
+    /* const mechanicId = req.params.id;
+      code to retrieve a user by ID from the database
+     res.send(`This is the response for GET /users/${userId}`);*/
+     const storedUserId = parseInt(req.params.storedUserId)
+       // console.log(userId)
+ 
+     pool.query('SELECT * FROM public.appointments WHERE "user_id" = $1', [storedUserId], (error, results) => {
+        if (error) {
+          console.log(error);
+         res.status(500).json({ error: 'An error occurred while fetching mechanics' });
+        } else {
+          res.status(200).json(results.rows);
+        }
+      });
+      
+ 
+ });  
 // PUT /users/:id - Update a user by ID
 appointmentsRoute.put('/:id', (req, res) => {
     /*const userId = req.params.id;
@@ -99,7 +120,7 @@ appointmentsRoute.delete('/:id', (req, res) => {
 
     pool.query('DELETE FROM public.appointments WHERE id = $1', [id], (error, results) => {
         if (error) {
-            console.log(error) 
+            console.log(error)
         }
         res.status(200).send(`appoinments deleted with ID: ${results.id}`)
     });

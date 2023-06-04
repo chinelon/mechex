@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router-dom';
 
+const Dashboard = () => {
+    const sessionIdentifier = localStorage.getItem('session');
+    const navigate = useNavigate()
+    if (!sessionIdentifier) {
+        // Session identifier is not present, redirect to login page
+        navigate('/login')
+    }
 
-function Dashboard() {
     return (
         <div className='dashboard'>
             <div>
