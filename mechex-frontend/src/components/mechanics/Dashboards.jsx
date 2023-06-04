@@ -6,7 +6,7 @@ function Dashboards() {
     return (
         <div className='dashboard'>
             <div>
-                <Link to="/appointments">View Appointments</Link>
+                <Link to="/appointment">View Appointments</Link>
             </div>
             <div>
                 <Link to="/follow-up">Track Progress</Link>

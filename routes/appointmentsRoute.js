@@ -72,7 +72,7 @@ appointmentsRoute.post('/', (req, res) => {
         }
     });
 });
-
+//gets appointments based on the stored userid
 appointmentsRoute.get('/user/:storedUserId', (req, res) => {
     /* const mechanicId = req.params.id;
       code to retrieve a user by ID from the database
@@ -90,7 +90,46 @@ appointmentsRoute.get('/user/:storedUserId', (req, res) => {
       });
       
  
- });  
+ });
+ 
+ appointmentsRoute.get('/mechanic/:storedMechanicId', (req, res) => {
+    /* const mechanicId = req.params.id;
+      code to retrieve a user by ID from the database
+     res.send(`This is the response for GET /users/${userId}`);*/
+     const storedMechanicId = parseInt(req.params.storedMechanicId)
+       // console.log(userId)
+ 
+     pool.query('SELECT * FROM public.appointments WHERE "mechanic_id" = $1', [storedMechanicId], (error, results) => {
+        if (error) {
+          console.log(error);
+         res.status(500).json({ error: 'An error occurred while fetching appointments' });
+        } else {
+          res.status(200).json(results.rows);
+        }
+      });
+      
+ 
+ }); 
+
+ appointmentsRoute.put('/:appointment_id', (req, res) => {
+    const appointment_id = req.params.id;
+    const { status, notes } = req.body;
+  
+    // Your code to update the appointment progress and notes in the database
+    pool.query(
+      'UPDATE public.appointments SET status = $1, notes = $2 WHERE id = $3',
+      [status, notes, appointment_id],
+      (error, results) => {
+        if (error) {
+          console.log(error);
+          return res.status(500).json({ error: 'An error occurred while updating appointment progress' });
+        }
+  
+        res.status(200).json({ success: true, message: 'Appointment progress and notes updated successfully' });
+      }
+    );
+  });
+  
 // PUT /users/:id - Update a user by ID
 appointmentsRoute.put('/:id', (req, res) => {
     /*const userId = req.params.id;

@@ -1,31 +1,39 @@
 //import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-function ViewApp() {
-  const storedUserId = localStorage.getItem('id');
+function ViewApps() {
+  const storedMechanicId = localStorage.getItem('mid');
   const [appointments, setAppointments] = useState([]);
+  const navigate = useNavigate()
+  
+  const handleClick = (appointment_id) => {
+    
+    // Navigate to the Followups component
+    navigate(`/follow-up/${appointment_id}`);
+  };
 
   useEffect(() => {
-    console.log(storedUserId)
+    console.log(storedMechanicId)
     const fetchAppointments = async () => {
       try {
-        const response = await axios.get(`http://localhost:5004/appointments/user/${storedUserId}`);
+        const response = await axios.get(`http://localhost:5004/appointments/mechanic/${storedMechanicId}`);
         setAppointments(response.data);
-        
+        console.log(response.data)
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchAppointments();
-  }, [storedUserId]);
+  }, [storedMechanicId]);
 
   const ChangeDate = (date) => {
     //Get the datee
     var newdate = date.toString();
 
-    const finalDate = newdate.split("T")    
+    const finalDate = newdate.split("T")
     //Split based on t
     return finalDate[0];
   }
@@ -53,6 +61,9 @@ function ViewApp() {
               <td>{appointment.vehicle_make}</td>
               <td>{appointment.vehicle_model}</td>
               <td>{appointment.vehicle_description}</td>
+              <td>
+                <button onClick={() => handleClick(appointment.id)}>Update Progress</button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -61,4 +72,4 @@ function ViewApp() {
   );
 }
 
-export default ViewApp;
+export default ViewApps;

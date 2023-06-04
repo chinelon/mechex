@@ -15,6 +15,7 @@ import Signups from './components/mechanics/Signups';
 import Login from './components/Login';
 import Dashboards from './components/mechanics/Dashboards';
 import FollowUp from './components/mechanics/FollowUp';
+import ViewApps from './components/mechanics/ViewApps';
 
 //defines session context
 export const SessionContext = createContext();
@@ -36,7 +37,7 @@ function App() {
     }
   }, []);
 
-  const handleLogin = (sessionIdentifier, user_id) => {
+  const handleLogin = (sessionIdentifier, user_id, mechanic_id) => {
     setSession(sessionIdentifier);
     localStorage.setItem('session', sessionIdentifier);
     localStorage.setItem('id', user_id);
@@ -86,8 +87,9 @@ function App() {
             <Route path="/dashboards/*" element={<ProtectedRoute path="/" element={<Dashboards />} />} />
             <Route path="/booking/*" element={<ProtectedRoute path="/" element={<BookApp user_id={user_id} />} />} />
             <Route path="/appointments/*" element={<ProtectedRoute path="/" element={<ViewApp />} />} />
+            <Route path="/appointment/*" element={<ProtectedRoute path="/" element={<ViewApps />} />} />
             <Route path="/progress/*" element={<ProtectedRoute path="/" element={<TrackProg />} />} />
-            <Route path="/follow-up/*" element={<ProtectedRoute path="/" element={<FollowUp />} />} />
+            <Route path="/follow-up/:appointment_id/*" element={<ProtectedRoute path="/" element={<FollowUp />} />} />
           </Routes>
         </div>
       </Router>
