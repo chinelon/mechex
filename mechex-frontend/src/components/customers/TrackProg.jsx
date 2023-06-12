@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link  } from 'react-router-dom';
 import axios from 'axios';
 
 function TrackProg() {
@@ -9,7 +10,7 @@ function TrackProg() {
     // Fetch the appointments data from the backend API
     const fetchAppointments = async () => {
       try {
-        const response = await axios.get('http://localhost:5004/appointments/user/${storedUserId}');
+        const response = await axios.get(`http://localhost:5004/appointments/user/${storedUserId}`);
         setAppointments(response.data);
       } catch (error) {
         console.log(error);
@@ -21,28 +22,18 @@ function TrackProg() {
 
   return (
     <div>
-      <h2>Track Progress</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Appointment ID</th>
-            <th>Description</th>
-            <th>Status</th>
-            <th>Mechanic's Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          {appointments.map((appointment) => (
-            <tr key={appointment.id}>
-              <td>{appointment.id}</td>
-              <td>{appointment.description}</td>
-              <td>{appointment.status}</td>
-              <td>{appointment.notes}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <h2>Track Progress</h2>
+    <div className="track-progress-grid">
+      {appointments.map((appointment) => (
+        <div key={appointment.id} className="progress-card">
+          <div>Appointment ID: {appointment.id}</div>
+          <div>Description: {appointment.vehicle_description}</div>
+          <div>Status: {appointment.status}</div>
+          <div>Mechanic's Notes: {appointment.notes}</div>
+        </div>
+      ))}
     </div>
+  </div>
   );
 }
 

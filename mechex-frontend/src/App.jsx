@@ -2,7 +2,7 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import './App.css';
+import './index.css';
 import BookApp from './components/customers/BookApp';
 import ViewApp from './components/customers/ViewApp';
 import TrackProg from './components/customers/TrackProg';
@@ -16,7 +16,8 @@ import Login from './components/Login';
 import Dashboards from './components/mechanics/Dashboards';
 import FollowUp from './components/mechanics/FollowUp';
 import ViewApps from './components/mechanics/ViewApps';
-
+import Sidebar from './components/Sidebar'
+import Nav from './components/Nav';
 //defines session context
 export const SessionContext = createContext();
 
@@ -74,7 +75,7 @@ function App() {
       <Router>
         <div className="App">
           <Navbar />
-
+          
           <Routes>
             <Route path="/" element={<LandPage />} />
             <Route path="/about" element={<About />} />

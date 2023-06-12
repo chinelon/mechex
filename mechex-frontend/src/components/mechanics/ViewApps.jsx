@@ -1,7 +1,7 @@
 //import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function ViewApps() {
   const storedMechanicId = localStorage.getItem('mid');
@@ -15,7 +15,7 @@ function ViewApps() {
   };
 
   useEffect(() => {
-    console.log(storedMechanicId)
+    console.log('storedmechanicid',storedMechanicId)
     const fetchAppointments = async () => {
       try {
         const response = await axios.get(`http://localhost:5004/appointments/mechanic/${storedMechanicId}`);
@@ -40,34 +40,27 @@ function ViewApps() {
 
   return (
     <div>
+      <div>
+        <Link to="/dashboard">Back to Dashboard</Link>
+      </div>
       <h2>View Appointments</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>Mechanic</th>
-            <th>Date</th>
-            <th>Make</th>
-            <th>Model</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {appointments.map((appointment) => (
-            <tr key={appointment.id}>
-              <td>{appointment.user_id}</td>
-              <td>{appointment.mechanic_id}</td>
-              <td>{ChangeDate(appointment.appointment_date)}</td>
-              <td>{appointment.vehicle_make}</td>
-              <td>{appointment.vehicle_model}</td>
-              <td>{appointment.vehicle_description}</td>
-              <td>
-                <button onClick={() => handleClick(appointment.id)}>Update Progress</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="view-appointments-grid">
+        {appointments.map((appointment) => (
+          <div key={appointment.id} className="appointment-card">
+            <div>User: {appointment.user_id}</div>
+            <div>Mechanic: {appointment.mechanic_id}</div>
+            <div>Date: {ChangeDate(appointment.appointment_date)}</div>
+            <div>Make: {appointment.vehicle_make}</div>
+            <div>Model: {appointment.vehicle_model}</div>
+            <div>Description: {appointment.vehicle_description}</div>
+            <div>
+              <button onClick={() => handleClick(appointment.id)}>
+                Update Progress
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

@@ -1,7 +1,10 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom';
+import Sidebar from '../Sidebar';
+import Nav from '../Nav';
+import ViewApp from './ViewApp';
+import TrackProg from './TrackProg'
 
 const Dashboard = () => {
     const sessionIdentifier = localStorage.getItem('session');
@@ -13,14 +16,20 @@ const Dashboard = () => {
 
     return (
         <div className='dashboard'>
-            <div>
-                <Link to="/booking">Book Appointment</Link>
+            <div class="sidebar">
+                <div>
+                    <Sidebar />
+                </div>
             </div>
-            <div>
-                <Link to="/appointments">View Appointments</Link>
+            <div class="projects">
+                <div>
+                    <ViewApp />
+                </div>
             </div>
-            <div>
-                <Link to="/progress">Track Progress</Link>
+            <div class="track">
+                <div>
+                    <TrackProg />
+                </div>
             </div>
         </div>
     );

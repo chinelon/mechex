@@ -112,7 +112,7 @@ appointmentsRoute.get('/user/:storedUserId', (req, res) => {
  }); 
 
  appointmentsRoute.put('/:appointment_id', (req, res) => {
-    const appointment_id = req.params.id;
+    const appointment_id = parseInt(req.params.appointment_id);
     const { status, notes } = req.body;
   
     // Your code to update the appointment progress and notes in the database
@@ -124,8 +124,8 @@ appointmentsRoute.get('/user/:storedUserId', (req, res) => {
           console.log(error);
           return res.status(500).json({ error: 'An error occurred while updating appointment progress' });
         }
-  
-        res.status(200).json({ success: true, message: 'Appointment progress and notes updated successfully' });
+        console.log('Received data:', {  status, notes });
+        res.status(200).json(/*{ success: true, message: 'Appointment progress and notes updated successfully' },*/ `Mechanic modified with ID: ${appointment_id}`);
       }
     );
   });

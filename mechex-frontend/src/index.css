@@ -1,105 +1,126 @@
-
-.dashboard{
+/*View appointments*/
+.appointments-grid {
   display: grid;
-  grid-template-columns: 500px 500px;
-  grid-template-rows: 400px 400px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+  grid-column: 2 /3;
+  grid-row: 3 / 6;
+  padding: 20px;
+  padding-top: 20px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.dashboard div{
-  border: 1px solid black;
-  background-color: orange;
+.appointment-card {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-left: solid darkcyan 10px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 5px 5px 5px grey;
+  border: solid balck 2px;
 }
+
+.view-appointments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
+
+/*track progress */
+.track-progress-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
+
+.progress-card {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-left: solid darkcyan 10px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 5px 5px 5px grey;
+  border: solid balck 2px;
+}
+
 /*navbar css*/
 .flex-container {
-  background: #1F2937;
-  height: 25px;
-  width: 1325px;
-  display: flex;
-  padding: 50px;
-}
-
-.flex-container div {
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  color: white;
-}
-
-.flexitem1 {
-  justify-content: left;
-  font-size: 48px;
-  font-weight: bold;
-
-}
-
-.flexitem2 {
-  display: flex;
-  text-align: center; 
-  margin-left: 700px;
-  width: 300px;
+  background-color: #422048;
   height: 50px;
+  width: 1425px;
+  color: white
 }
 
-.flexitem2 div{
- flex:1;
- font-weight: 800;
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 200px 3fr 1fr; /* Adjust the column widths as needed */
+  height: 100vh; /* Set the height of the dashboard to full viewport height */
 }
 
-.flexitem3 {
+.sidebar {
+  background-color: #f7f0fa;
+  padding: 20px;
+}
+
+.projects {
+  background-color: #f7f0fa;
+  padding: 20px;
+  border-left: 2px solid #d6c5dd;
+}
+
+.track {
+  background-color: #fdf7ff;
+
+  padding: 20px;
+}
+
+.dashboard div {
+  font-family: 'Georgia', sans-serif;
+  
+}
+
+
+/*welcome*/
+
+.welcome{
+  padding: 50px;
+
   display: flex;
-  flex-direction: column;
-  width: 500px;
+
+  gap: 50px;
 }
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #333;
+.welcome div{
   color: white;
-  padding: 1rem;
+  border-radius: 10px;
+  background-image:url('./assets/mechanc-icon.jpg');
+  text-align: center;
+  padding: 10px;
+  padding-top: 30px;
+  flex: 1;
+  height: 50px;
+  width: 50px;
+  
 }
 
-.navbar-brand {
-  font-size: 1.5rem;
+.sidebars {
+  gap: 1px;
+  padding-left: 20px;
+  font-weight: bold;
+  padding-top: 50px;
+
 }
 
-.navbar-links {
-  display: flex;
-  gap: 1rem;
+.sidebars div {
+  padding: 10px;
+  padding-left: 20px;
+  color: black;
 }
 
-.navbar-link {
-  font-size: 1.2rem;
-  text-decoration: none;
-  color: white;
-  transition: all 0.3s ease;
-}
 
-.navbar-link:hover {
-  color: #ffc107;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-/*
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-*/
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -111,9 +132,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -122,12 +145,17 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
+  }
+  a{
+    color: #1a1a1a;
   }
 }

@@ -1,5 +1,6 @@
 //import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function ViewApp() {
@@ -12,7 +13,7 @@ function ViewApp() {
       try {
         const response = await axios.get(`http://localhost:5004/appointments/user/${storedUserId}`);
         setAppointments(response.data);
-        
+
       } catch (error) {
         console.log(error);
       }
@@ -25,38 +26,32 @@ function ViewApp() {
     //Get the datee
     var newdate = date.toString();
 
-    const finalDate = newdate.split("T")    
+    const finalDate = newdate.split("T")
     //Split based on t
     return finalDate[0];
   }
 
   return (
     <div>
-      <h2>View Appointments</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>Mechanic</th>
-            <th>Date</th>
-            <th>Make</th>
-            <th>Model</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
+      <div className="welcome">
+                    <div>
+                        <Link to="/booking">Ready for a New Appointment?</Link>
+                    </div>
+                    <div>
+                        <Link to="/map">Mechanics Map</Link>
+                    </div>
+      </div>
+        <h2>View Appointments</h2>
+        <div className="appointments-grid">
           {appointments.map((appointment) => (
-            <tr key={appointment.id}>
-              <td>{appointment.user_id}</td>
-              <td>{appointment.mechanic_id}</td>
-              <td>{ChangeDate(appointment.appointment_date)}</td>
-              <td>{appointment.vehicle_make}</td>
-              <td>{appointment.vehicle_model}</td>
-              <td>{appointment.vehicle_description}</td>
-            </tr>
+            <div key={appointment.id} className="appointment-card">
+              <div>Appointment Date: {ChangeDate(appointment.appointment_date)}</div>
+              <div>Vehicle Make: {appointment.vehicle_make}</div>
+              <div>Vehicle Model: {appointment.vehicle_model}</div>
+              <div>Description: {appointment.vehicle_description}</div>
+            </div>
           ))}
-        </tbody>
-      </table>
+        </div>
     </div>
   );
 }
