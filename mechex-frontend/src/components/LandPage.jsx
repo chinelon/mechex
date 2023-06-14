@@ -25,10 +25,10 @@ function LandPage() {
             Login
           </Link>
           <Link to="/signup" className="cta-button">
-            Mechanic SignUp
+          User Signup
           </Link>
           <Link to="/signups" className="cta-button">
-            User Signup
+            Mechanic SignUp
           </Link>
         </div>
       </div>

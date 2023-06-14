@@ -8,7 +8,8 @@ import ViewApp from './components/customers/ViewApp';
 import TrackProg from './components/customers/TrackProg';
 import Navbar from './components/NavBar';
 import Dashboard from './components/customers/Dashboard';
-import About from './components/about';
+import About from './components/About';
+import ContactUs from './components/ContactUs';
 import LandPage from './components/LandPage';
 import Signup from './components/customers/Signup';
 import Signups from './components/mechanics/Signups';
@@ -16,8 +17,7 @@ import Login from './components/Login';
 import Dashboards from './components/mechanics/Dashboards';
 import FollowUp from './components/mechanics/FollowUp';
 import ViewApps from './components/mechanics/ViewApps';
-import Sidebar from './components/Sidebar'
-import Nav from './components/Nav';
+
 //defines session context
 export const SessionContext = createContext();
 
@@ -79,7 +79,7 @@ function App() {
           <Routes>
             <Route path="/" element={<LandPage />} />
             <Route path="/about" element={<About />} />
-            <Route path="/contact-us" element={<Contact-Us />} />
+            <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/login" element={<Login onLogin={handleLogin} />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/signups" element={<Signups />} />

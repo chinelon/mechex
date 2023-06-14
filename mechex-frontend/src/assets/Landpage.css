@@ -1,5 +1,9 @@
 /* Landpage.css */
-
+/*
+text: #98adce;
+border: #7f8faa;
+background color and box-shadow: #6c798d
+*/
 .body {
     margin: 0;
     padding: 0;
@@ -13,12 +17,11 @@ landing-page {
 
 .landing-page {
   font-family: 'Georgia', sans-serif;
-  background-image: url("../assets/background2.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   margin: 0;
-  color: white;
+  color: #98adce;
 }
 
 .content {
@@ -26,8 +29,7 @@ landing-page {
   flex-direction: column;
   padding-top: 290px;
   padding-bottom: 200px;
-  padding-left: 50px;
-  justify-content: left;
+  align-items: center;
 }
 
 h1 {
@@ -51,8 +53,10 @@ p{
 
 .cta-button {
   display: flex;
-  color: white;
-  border: 1px solid black;
+  color: #98adce;
+  background-color: white;
+  box-shadow: 5px 5px;
+  border: 1px solid #7f8faa;
   padding: 10px 20px;
   font-size: 16px;
   font-weight: bold;
@@ -62,7 +66,7 @@ p{
 }
 
 .cta-button:hover {
-  background-color: #D83F87;
+  background-color: #6c798d;
   color: black;
 }
 
@@ -70,7 +74,6 @@ p{
 .testimonial {
   display: flex;
   gap: 20px;
-  background-color: #b24e7d;
   padding: 20px;
 
 }
@@ -78,15 +81,13 @@ p{
 .testimonial div {
   border-radius: 10px;
   padding: 10px 20px;
-  background-color: #D83F87;
+  border:1px solid #6c798d;
   text-align: center;
   padding: 20px;
-
-  box-shadow: 5px 5px 5px #733c56;
+  box-shadow: 5px 5px #6c798d;
 }
 
 .footer {
-  background-color: #b24e7d;
   padding-left: 600px;
   padding-top: 20px;
   padding-bottom: 20px;

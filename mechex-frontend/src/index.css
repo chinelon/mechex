@@ -13,12 +13,14 @@
 .appointment-card {
   padding: 20px;
   border: 1px solid #ccc;
-  border-left: solid darkcyan 10px;
   background-color: white;
   border-radius: 10px;
   padding: 10px;
-  box-shadow: 5px 5px 5px grey;
-  border: solid balck 2px;
+  box-shadow: 5px 5px 5px #7f8faa;
+}
+
+.appointment-card div {
+  padding: 20px;
 }
 
 .view-appointments-grid {
@@ -36,87 +38,83 @@
 
 .progress-card {
   padding: 20px;
-  border: 1px solid #ccc;
-  border-left: solid darkcyan 10px;
   background-color: white;
   border-radius: 10px;
   padding: 10px;
-  box-shadow: 5px 5px 5px grey;
-  border: solid balck 2px;
+  box-shadow: 5px 5px 5px #7f8faa;
+}
+
+.progress-card div {
+  padding: 10px;
 }
 
 /*navbar css*/
 .flex-container {
-  background-color: #422048;
-  height: 50px;
-  width: 1425px;
-  color: white
+  box-shadow: 0px 5px 5px #6c798d;
+  padding: 20px;
+  color: #98adce;
 }
 
-
+/*dashboard*/
 .dashboard {
   display: grid;
-  grid-template-columns: 200px 3fr 1fr; /* Adjust the column widths as needed */
-  height: 100vh; /* Set the height of the dashboard to full viewport height */
+  grid-template-columns: 200px 3fr 1fr;
+  /* Adjust the column widths as needed */
+  height: 100vh;
+  /* Set the height of the dashboard to full viewport height */
 }
 
 .sidebar {
-  background-color: #f7f0fa;
   padding: 20px;
 }
 
 .projects {
-  background-color: #f7f0fa;
   padding: 20px;
-  border-left: 2px solid #d6c5dd;
+  border-left: 2px solid #d2dae6;
 }
 
 .track {
-  background-color: #fdf7ff;
-
+  background-color: #e0e5ed;
   padding: 20px;
 }
 
 .dashboard div {
   font-family: 'Georgia', sans-serif;
-  
 }
 
 
 /*welcome*/
 
-.welcome{
+.welcome {
   padding: 50px;
-
   display: flex;
-
   gap: 50px;
 }
 
-.welcome div{
+.welcome div {
   color: white;
   border-radius: 10px;
-  background-image:url('./assets/mechanc-icon.jpg');
   text-align: center;
   padding: 10px;
   padding-top: 30px;
   flex: 1;
-  height: 50px;
-  width: 50px;
-  
+
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px #7f8faa;
 }
 
 .sidebars {
-  gap: 1px;
-  padding-left: 20px;
-  font-weight: bold;
+  
+font-weight: 400px;
   padding-top: 50px;
 
 }
 
 .sidebars div {
   padding: 10px;
-  padding-left: 20px;
+  padding-top: 30px;
   color: black;
 }
 
@@ -145,7 +143,8 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-
+    background-color: #f0f4fa;
+    font-family: 'Georgia', sans-serif;
   }
 
   a:hover {
@@ -153,9 +152,10 @@ button:focus-visible {
   }
 
   button {
-    background-color: #f9f9f9;
+    background-color: #f0f4fa;
   }
-  a{
+
+  a {
     color: #1a1a1a;
   }
 }

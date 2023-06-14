@@ -3,7 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-
+ import '/Users/laurennwobbi/mechEx/mechex-frontend/src/assets/Booking.css'
 function Login({ onLogin }) {
 
   const [email, setEmail] = useState('');
@@ -46,7 +46,7 @@ function Login({ onLogin }) {
 
 
   return (
-    <div>
+    <div className="form-columnss">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -69,7 +69,7 @@ function Login({ onLogin }) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit">
+        <button className ="submits-button" type="submit">
           Login
         </button>
       </form>
