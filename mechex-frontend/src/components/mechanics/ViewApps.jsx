@@ -40,9 +40,6 @@ function ViewApps() {
 
   return (
     <div>
-      <div>
-        <Link to="/dashboard">Back to Dashboard</Link>
-      </div>
       <h2>View Appointments</h2>
       <div className="view-appointments-grid">
         {appointments.map((appointment) => (

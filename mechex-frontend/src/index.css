@@ -82,7 +82,14 @@
   font-family: 'Georgia', sans-serif;
 }
 
-
+/*dashboards*/
+.dashboards {
+  display: grid;
+  grid-template-columns: 200px 2fr;
+  /* Adjust the column widths as needed */
+  height: 100vh;
+  /* Set the height of the dashboard to full viewport height */
+}
 /*welcome*/
 
 .welcome {
@@ -109,7 +116,7 @@
   
 font-weight: 400px;
   padding-top: 50px;
-
+padding-left: 20px;
 }
 
 .sidebars div {
@@ -118,7 +125,61 @@ font-weight: 400px;
   color: black;
 }
 
+/*contact*/
 
+.contact-us-container {
+  display: flex;
+}
+
+.contact-us-section {
+  flex: 1;
+  padding: 20px;
+  margin-left: 100px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.contact-info{
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px #6c798d;
+}
+.contact-info p {
+  margin-bottom: 10px;
+}
+
+.contact-info strong {
+  font-weight: bold;
+}
+
+/*about*/
+
+.about-page {
+  display: flex;
+  margin-top: 20px;
+}
+
+.about-content {
+  flex: 1;
+  padding: 20px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px #6c798d;
+}
+.team-members{
+  display: flex;
+}
+.team-member img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
 button {
   border-radius: 8px;
   border: 1px solid transparent;

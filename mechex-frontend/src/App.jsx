@@ -91,6 +91,7 @@ function App() {
             <Route path="/appointment/*" element={<ProtectedRoute path="/" element={<ViewApps />} />} />
             <Route path="/progress/*" element={<ProtectedRoute path="/" element={<TrackProg />} />} />
             <Route path="/follow-up/:appointment_id/*" element={<ProtectedRoute path="/" element={<FollowUp />} />} />
+            
           </Routes>
         </div>
       </Router>

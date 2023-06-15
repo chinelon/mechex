@@ -58,11 +58,11 @@ function Signups() {
   };
 
   return (
-    <div>
-      <h2>Welcome to our Mechanic Party!</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <div>
+    <div className="signup">
+      <div className="main-form">
+        <h2>Welcome to our Mechanic Party!</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="search-form">
             <label htmlFor="usertype">What kind of user are you?:</label>
             <select
               id="usertype"
@@ -73,69 +73,79 @@ function Signups() {
               <option value="mechanic">Mechanic</option>
             </select>
           </div>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            placeholder='Chinelo Nwobbi'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="phone">Phone Number: </label>
-          <input
-            type="text"
-            id="phone"
-            placeholder='09063330222'
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            placeholder='chinelo@yahoo.com'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="address">Street Address:</label>
-          <input
-            type="address"
-            id="address"
-            placeholder='12, Brimsdale road'
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="city">City:</label>
-          <input
-            type="city"
-            id="city"
-            placeholder='Ikeja'
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            placeholder='******'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+          <div className="formcolumns">
+            <div className="formcolumn">
+              <div id="name">
+                <label htmlFor="name"></label>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder='Name'
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div id="phone">
+                <label htmlFor="phone"></label>
+                <input
+                  type="text"
+                  id="phone"
+                  placeholder='Phone Number:'
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+              </div>
+              <div id="email">
+                <label htmlFor="email"></label>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder='Email:'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="formcolumn">
+
+              <div id="address">
+                <label htmlFor="address"> </label>
+                <input
+                  type="address"
+                  id="address"
+                  placeholder='Street Address:'
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
+              </div>
+              <div id="city">
+                <label htmlFor="city"></label>
+                <input
+                  type="city"
+                  id="city"
+                  placeholder='City:'
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                />
+              </div>
+              <div id="password">
+                <label htmlFor="password"></label>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder='Password:'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+            </div>
 
 
-        <button type="submit">Sign up</button>
-      </form>
+          </div>
+
+          <button className="submitbutton" type="submit">Sign up</button>
+        </form>
+      </div>
     </div>
   )
 }

@@ -57,12 +57,12 @@ function FollowUp() {
 
 
     return (
-        <div>
+        <div className="form-columnss">
             <div><Link to="/dashboards">Back to Dashboard</Link></div>
             <h2>Enter Follow up Information</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="statuss">Status:</label>
+                    <label htmlFor="statuss">Status: </label>
                     <input
                         type="number"
                         id="status"
@@ -72,7 +72,7 @@ function FollowUp() {
                     />
                 </div>
                 <div>
-                    <label htmlFor="notes">Notes:</label>
+                    <label htmlFor="notes">Notes: </label>
                     <input
                         type="text"
                         id="notes"
@@ -82,7 +82,7 @@ function FollowUp() {
                     />
                 </div>
 
-                <button type="submit">
+                <button className="submits-button" type="submit">
                     Save
                 </button>
             </form>

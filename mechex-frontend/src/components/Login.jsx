@@ -50,7 +50,7 @@ function Login({ onLogin }) {
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email">     Email:</label>
           <input
             type="email"
             id="email"

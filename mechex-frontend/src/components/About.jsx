@@ -1,27 +1,43 @@
 import React from 'react';
 import '../assets/About.css';
 import Sidebar from './Sidebar';
+import johnDoeImage from '../assets/logo.png';
+
 
 function About() {
 	return (
 		<div className="about-page">
-			<Sidebar />
-			<h1>About Us</h1>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis varius enim eget nunc efficitur, sed consequat enim euismod. Aliquam gravida sapien non dolor varius, sit amet ultrices massa elementum. Suspendisse feugiat libero quis velit bibendum, ut molestie augue vestibulum.</p>
-			<section>
-				<h2>Our Story</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ullamcorper, risus a pulvinar porttitor, massa turpis accumsan velit, eu iaculis sapien odio in magna.</p>
-			</section>
-			<section>
-				<h2>Our Team</h2>
-				<ul>
-					<li>John Doe - CEO</li>
-					<li>Jane Smith - CFO</li>
-					<li>Bob Johnson - CTO</li>
-				</ul>
-			</section>
-			
-		</div>
+		<Sidebar />
+		<div className="about-content">
+		  <h1>About Us</h1>
+		  <p>
+			Our company is dedicated to providing top-quality automotive services and connecting mechanics with customers in an efficient and convenient way. We strive to enhance customer service in the automotive industry by leveraging modern technology and creating a seamless experience for our users.
+		  </p>
+		  <section>
+			<h2>Our Story</h2>
+			<p>
+			  Our journey began with a passion for improving the automotive service industry. We noticed the challenges faced by both customers and mechanics, and we aimed to bridge the gap between them. With the help of our talented team and innovative technologies, we developed a platform that simplifies the process of finding and connecting with skilled mechanics.
+			</p>
+		  </section>
+		  <section>
+			<h2>Our Team</h2>
+			<div className="team-members">
+			  <div className="team-member">
+			  <img src={johnDoeImage} alt="Jane Smith" />
+				<p>John Doe - CEO</p>
+			  </div>
+			  <div className="team-member">
+			  <img src={johnDoeImage} alt="Jane Smith" />				
+			  <p>Jane Smith - CFO</p>
+			  </div>
+			  <div className="team-member">
+			  <img src={johnDoeImage} alt="Jane Smith" />              
+			  <p>Bob Johnson - CTO</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
 	);
 }
 

@@ -7,14 +7,10 @@ import Nav from '../Nav';
 function Dashboards() {
 
     return (
-        <div className='dashboard'>
-            <div class="mdashboard">
+        <div className='dashboards'>
+            <div class="sidebar">
                 <Sidebar />
             </div>
-            <div class="header">
-                <Nav />
-            </div>
-
             <div class="projects">
                 <div>
                     <ViewApps />
