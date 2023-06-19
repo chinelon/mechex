@@ -24,11 +24,11 @@ function About() {
 			<div className="team-members">
 			  <div className="team-member">
 			  <img src={johnDoeImage} alt="Jane Smith" />
-				<p>John Doe - CEO</p>
+				<p>Chinelo - Creator</p>
 			  </div>
 			  <div className="team-member">
 			  <img src={johnDoeImage} alt="Jane Smith" />				
-			  <p>Jane Smith - CFO</p>
+			  <p>Chinelo Nwobbi - CFO</p>
 			  </div>
 			  <div className="team-member">
 			  <img src={johnDoeImage} alt="Jane Smith" />              

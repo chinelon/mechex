@@ -16,8 +16,8 @@ app.use('/api/mechanics', mechanicsRoute);
 const appointmentsRoute = require('./routes/appointmentsRoute');
 app.use('/api/appointments', appointmentsRoute);
 
-const progressRoute = require('./routes/progressRoute');
-app.use('/api/progress', progressRoute);
+const reviews = require('./routes/reviews');
+app.use('/api/reviews', reviews);
 
 /*Next, add middleware to your application. Middleware is software that lies between an operating 
 system and the applications running on it, and is used to manage network resources and other aspects of the system.*/

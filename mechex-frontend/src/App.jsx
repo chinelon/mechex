@@ -17,6 +17,9 @@ import Login from './components/Login';
 import Dashboards from './components/mechanics/Dashboards';
 import FollowUp from './components/mechanics/FollowUp';
 import ViewApps from './components/mechanics/ViewApps';
+import Map from './components/customers/Map';
+import {withGoogleMaps} from 'react-google-maps'
+import ViewMech from './components/customers/ViewMech';
 
 //defines session context
 export const SessionContext = createContext();
@@ -83,6 +86,8 @@ function App() {
             <Route path="/login" element={<Login onLogin={handleLogin} />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/signups" element={<Signups />} />
+            <Route path="/map" element={<Map />} />
+
 
             <Route path="/dashboard/*" element={<ProtectedRoute path="/" element={<Dashboard />} />} />
             <Route path="/dashboards/*" element={<ProtectedRoute path="/" element={<Dashboards />} />} />
@@ -91,6 +96,9 @@ function App() {
             <Route path="/appointment/*" element={<ProtectedRoute path="/" element={<ViewApps />} />} />
             <Route path="/progress/*" element={<ProtectedRoute path="/" element={<TrackProg />} />} />
             <Route path="/follow-up/:appointment_id/*" element={<ProtectedRoute path="/" element={<FollowUp />} />} />
+            <Route path="/mechanics/*" element={<ProtectedRoute path="/" element={<ViewMech />} />} />
+
+
             
           </Routes>
         </div>

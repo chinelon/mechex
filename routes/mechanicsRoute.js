@@ -29,16 +29,16 @@ pool.connect()
 
 // example route; Define your API endpoints. These are the routes that your client-side code will use to interact with your server and database.
 mechanicsRoute.get('/', (req, res) => {
-    //Your code to retrieve all users from the database
-    res.send('This is the response for GET /users');
     pool.query('SELECT * FROM public.mechanics ORDER BY id ASC', (error, results) => {
         if (error) {
-            console.log(error)
+            console.log(error);
+            res.status(500).json({ error: 'Internal server error' });
         } else {
-            res.status(200).json(results.rows)
+            res.status(200).json(results.rows);
         }
     });
 });
+
 
 /*
 //gets/searches for mechanics based on their address

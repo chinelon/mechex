@@ -38,8 +38,12 @@ function ViewApp() {
                         <Link to="/booking">Ready for a New Appointment?</Link>
                     </div>
                     <div>
+                        <Link to="/mechanics">View Mechanics</Link>
+                    </div>
+                    <div>
                         <Link to="/map">Mechanics Map</Link>
                     </div>
+
       </div>
         <h2>View Appointments</h2>
         <div className="appointments-grid">

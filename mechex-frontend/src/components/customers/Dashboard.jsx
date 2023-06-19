@@ -21,12 +21,12 @@ const Dashboard = () => {
                     <Sidebar />
                 </div>
             </div>
-            <div class="projects">
+            <div className="projects">
                 <div>
                     <ViewApp />
                 </div>
             </div>
-            <div class="track">
+            <div className="track">
                 <div>
                     <TrackProg />
                 </div>
