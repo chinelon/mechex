@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/Landpage.css';
+import Icon from '@mui/material/Icon';
+
 
 // Import images/icons
 import logo from '../assets/logo.png';
@@ -13,6 +15,7 @@ function LandPage() {
 
       <div className="content">
         <div className="title">
+          <Icon>star</Icon>
           <h1>Welcome to MechEx!</h1>
         </div>
 

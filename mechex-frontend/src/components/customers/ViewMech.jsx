@@ -23,6 +23,28 @@ function ViewMech() {
         fetchMechanics();
     }, []);
 
+
+    useEffect(() => {
+        const fetchReviews = async () => {
+            if (mechanics.length > 0) {
+                try {
+                    const mechanic_id = mechanics[currentMechanicIndex]?.id
+                    console.log(mechanic_id)
+                    if (mechanic_id) {
+                        const response = await axios.get(`http://localhost:5005/reviews/mechanics/${mechanic_id}`);
+                        setReviews(response.data);
+                    } else
+                        console.log('no mechanicid')
+                } catch (error) {
+                    console.log(error);
+                    console.log('not working')
+                }
+            }
+        };
+
+        fetchReviews();
+    }, [currentMechanicIndex, mechanics]);
+
     const navigateNextMechanic = () => {
         setCurrentMechanicIndex((prevIndex) => (prevIndex + 1) % mechanics.length);
     };
@@ -32,28 +54,6 @@ function ViewMech() {
             prevIndex === 0 ? mechanics.length - 1 : prevIndex - 1
         );
     };
-
-    useEffect(() => {
-
-
-        const fetchReviews = async () => {
-            const mechanicId = mechanics[currentMechanicIndex].id
-            console.log(mechanicId)
-            if (mechanics.length > 0) {
-                try {
-                    const response = await axios.get(`http://localhost:5005/reviews/mechanics/${mechanicId}`);
-                    setReviews(response.data);
-                } catch (error) {
-                    console.log(error);
-                    console.log('not working')
-                }
-            }
-        };
-
-        fetchReviews();
-    }, [mechanicId, mechanics]);
-
-
     const createReview = async (mechanicId) => {
         try {
             const response = await axios.post('http://localhost:5005/reviews', {
@@ -76,21 +76,35 @@ function ViewMech() {
             <h2>View Mechanics</h2>
             {mechanics.length > 0 && (
                 <div className="mechanic-window">
-                    <div key={mechanics[currentMechanicIndex].id} className="appointment-card">
-                        <div>{mechanics[currentMechanicIndex].name}</div>
-                        <div>{mechanics[currentMechanicIndex].phone}</div>
-                        <div>{mechanics[currentMechanicIndex].email}</div>
-                        <div>{mechanics[currentMechanicIndex].address}</div>
-                        <div>{mechanics[currentMechanicIndex].city}</div>
+                    <div className="arrow left" onClick={navigatePreviousMechanic}>
+                        &lt;
+                    </div>
+                    <div key={mechanics[currentMechanicIndex].id} className="appointments-card">
+                        <div className='mechanics'>
+                            <div>{mechanics[currentMechanicIndex].name}</div>
+                            <div>{mechanics[currentMechanicIndex].phone}</div>
+                            <div>{mechanics[currentMechanicIndex].email}</div>
+                            <div>{mechanics[currentMechanicIndex].address}</div>
+                            <div>{mechanics[currentMechanicIndex].city}</div>
+                        </div>
                         <div className="review-section">
                             <h3>Reviews:</h3>
-                            <ul>
-                                {reviews.map((review) => (
-                                    <li key={review.id}>
-                                        <strong>{review.name}:</strong> {review.review}
-                                    </li>
-                                ))}
-                            </ul>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Review</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {reviews.map((review) => (
+                                        <tr key={review.id}>
+                                            <td>{review.name}</td>
+                                            <td>{review.review}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                             <div>
                                 <form>
                                     <div >
@@ -121,14 +135,8 @@ function ViewMech() {
                             </div>
                         </div>
                     </div>
-
-                    <div className="navigation-arrows">
-                        <div className="arrow left" onClick={navigatePreviousMechanic}>
-                            &lt;
-                        </div>
-                        <div className="arrow right" onClick={navigateNextMechanic}>
-                            &gt;
-                        </div>
+                    <div className="arrow right" onClick={navigateNextMechanic}>
+                        &gt;
                     </div>
                 </div>
             )}

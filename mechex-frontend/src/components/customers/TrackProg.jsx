@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link  } from 'react-router-dom';
 import axios from 'axios';
+import InsightsSharpIcon from '@mui/icons-material/InsightsSharp';
+import AnalyticsOutlinedIcon from '@mui/icons-material/AnalyticsOutlined';
 
 function TrackProg() {
   const [appointments, setAppointments] = useState([]);
@@ -22,10 +24,11 @@ function TrackProg() {
 
   return (
     <div>
-    <h2>Track Progress</h2>
+    <h2> < InsightsSharpIcon color="primary"/> Track Progress</h2>
     <div className="track-progress-grid">
       {appointments.map((appointment) => (
         <div key={appointment.id} className="progress-card">
+          <AnalyticsOutlinedIcon style={{ color: '#6c798d' }}/> 
           <div>Appointment ID: {appointment.id}</div>
           <div>Description: {appointment.vehicle_description}</div>
           <div>Status: {appointment.status}</div>

@@ -6,8 +6,6 @@ const cors = require('cors');
 
 // Define routes for the users resource
 const reviews = express.Router();
-
-
 //fixes the error '[Error] Origin http://127.0.0.1:5173 is not allowed by Access-Control-Allow-Origin. Status code: 200'
 app.use(cors())
 app.use(bodyParser.json());
@@ -50,17 +48,16 @@ reviews.post('/', (req, res) => {
   
 
 // GETs all reviews for a specific mechanic
-// GETs all reviews for a specific mechanic
-reviews.get('/reviews/mechanics/:mechanicId', (req, res) => {
-    const mechanicId = req.params.mechanicId;
+reviews.get('/mechanics/:mechanic_id', (req, res) => {
+    const mechanic_id = parseInt(req.params.mechanic_id)
   
     pool.query(
-      'SELECT * FROM reviews WHERE mechanic_id = $1',
-      [mechanicId],
+      'SELECT * FROM public.reviews WHERE mechanic_id = $1',
+      [mechanic_id],
       (error, result) => {
         if (error) {
           console.log(error);
-          res.status(500).json({ error: 'An error occurred while fetching the reviews' });
+          res.status(500).json({ error: 'An error occurred while fetching the reviews' , error});
         } else {
           res.status(200).json(result.rows);
         }
