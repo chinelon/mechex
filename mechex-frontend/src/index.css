@@ -1,4 +1,4 @@
-/*View appointments*/
+/* styling for the appointments cards shown on the dashboard line 1-34*/
 .appointments-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -33,7 +33,7 @@
   grid-gap: 20px;
 }
 
-/*view mechanics*/
+/* styling for view mechanics component and mechanic reviews*/
 .mechanic-window{
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
@@ -42,21 +42,22 @@
   justify-items: center;
 }
 .appointments-card {
-  height: 400px;
-  width: 600px;
+  height: 500px;
+  width: 700px;
   padding: 20px;
   border: 1px solid #ccc;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 2px 2px #7f8faa;
   display: flex;
-  
   margin-top: 100px;
 }
 
 .appointments-card div {
   padding: 20px;
+  padding-bottom: 10px;
   flex-grow: repeat(auto-fill, minmax(300px, 1fr));
+  column-gap: 10px;
 }
 
 .arrow {
@@ -67,7 +68,28 @@
   box-shadow: 0px 2px 2px #7f8faa;
 
 }
-/*track progress */
+.mechanics img {
+  width: 100px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 50%;
+ 
+}
+
+.viewreviews{
+  margin-top: 20px;
+  margin-left: 20px;
+  height: 100px;
+  overflow: auto;
+  border: solid 1px #7f8faa;
+  border-radius: 5px;
+ 
+}
+
+.reviews-container {
+  max-height: 100%;
+}
+/*track progress styling shown on the dashboard */
 .track-progress-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -86,7 +108,7 @@
   padding: 10px;
 }
 
-/*navbar css*/
+/* styling for the navbar and its corresponding image*/
 .flex-container {
   box-shadow: 0px 1px 5px #6c798d;
 padding-left: 20px;
@@ -100,7 +122,7 @@ padding-left: 20px;
   border-radius: 50%;
 }
 
-/*dashboard*/
+/* styling the dashboard component (customer)*/
 .dashboard {
   display: grid;
   grid-template-columns: 200px 3fr 1fr;
@@ -127,7 +149,7 @@ padding-left: 20px;
   font-family: 'Georgia', sans-serif;
 }
 
-/*dashboards*/
+/* styling the dashboards component (mechanic)*/
 .dashboards {
   display: grid;
   grid-template-columns: 200px 2fr;
@@ -155,7 +177,7 @@ padding-left: 20px;
   border-radius: 10px;
   box-shadow: 5px 5px 0px #7f8faa;
 }
-
+/*styling the side bar which can be found in the dashboard*/
 .sidebars {
   
 font-weight: 400px;
@@ -169,7 +191,7 @@ padding-left: 15px;
   color: black;
 }
 
-/*contact*/
+/*styling the contact us component */
 
 .contact-us-container {
   display: flex;
@@ -199,7 +221,7 @@ h2 {
   font-weight: bold;
 }
 
-/*about*/
+/*styling the about component */
 
 .about-page {
   display: flex;
@@ -225,6 +247,7 @@ h2 {
   margin-bottom: 10px;
 }
 
+/*global stlying for buttons in the project*/ 
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -245,7 +268,7 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-
+/*global stylings in project*/
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

@@ -1,26 +1,28 @@
 //this react component will be used to sign up customers
+//imports axios that is used to connect to the backend 
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 
 function Signup() {
+    //uses the useState hook to define a state variable and a corresponding setter function .
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [usertype, setUserType] = useState('customer')
+
+    // creates a variable called navigate and stores react-router-doms predefined function useNavigate in it
     const navigate = useNavigate();
 
-
-
+    //function handleSubmit handles when the form rendered in the return statement below is submitted
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            // Perform signup logic here
-            // You can use the username, password, email, and phone values
-            // Send a POST request to your backend API endpoint
+           /* tries Send a POST request to http://localhost:5002/users/signup your backend API endpoint. second part is an object that represents the data 
+      to be sent with the request.*/
 
             const response = await axios.post('http://localhost:5002/users/signup', {
                 username,
@@ -30,7 +32,7 @@ function Signup() {
                 user_type: usertype
             });
 
-            // Handle the response from the backend as needed
+            // log the response from the backend as needed
             console.log(response.data);
 
             // Reset form fields after successful signup
@@ -39,18 +41,17 @@ function Signup() {
             setEmail('');
             setPhone('');
             setUserType('');
-
+     
+            //navigates to the customers dashboard
             navigate('/dashboard');
         } catch (error) {
             // Handle any errors that occurred during the signup process
             console.error(error);
         }
 
-
-
     };
 
-
+  //the return statement renders the signup form where users input data which will be set in the state variable using the setters
     return (
         <div className='signup'>
             <div className='main-form'>
@@ -111,7 +112,7 @@ function Signup() {
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
-                            
+
                         </div>
 
                     </div>

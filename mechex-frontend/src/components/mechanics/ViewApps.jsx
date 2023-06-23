@@ -1,19 +1,26 @@
-//import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function ViewApps() {
+  // creates a variable called storedMechanicId and stores the mechanic id stored in the local storage in it 
   const storedMechanicId = localStorage.getItem('mid');
+  //uses the useState hook to define a state variable named appointments and a corresponding setter function named setAppointments.
   const [appointments, setAppointments] = useState([]);
+  // creates a variable called navigate and stores react-router-doms predefined function useNavigate in it
   const navigate = useNavigate()
-  
+
+  /**this function is called in the buitton at the button of each appointment when the button is clicked on it redirect to another page where
+   * mehanics can followup on a particular appointment based on the appointment id
+   */
   const handleClick = (appointment_id) => {
     
     // Navigate to the Followups component
     navigate(`/follow-up/${appointment_id}`);
   };
-
+/** this useffect hook is used here to as a side effect. the function fetchAppointments tries to make a GET request to
+ *  http://localhost:5004/appointments/mechanic/${storedMechanicId} in order to get the appointments of mechanics associated with a specific mechanic id
+ * when it gets the response.data from the backend it updates it with appoinments with setAppointments */
   useEffect(() => {
     console.log('storedmechanicid',storedMechanicId)
     const fetchAppointments = async () => {
@@ -29,6 +36,10 @@ function ViewApps() {
     fetchAppointments();
   }, [storedMechanicId]);
 
+/*the creation of the function in line 40-47 arose from complications associated with how the date of the appointments were being rendered. 
+the date was being rendered along with the time the split function was used to split the output from T (which is where the time started) and 
+return the first part of the result whic is our date*/
+
   const ChangeDate = (date) => {
     //Get the datee
     var newdate = date.toString();
@@ -37,7 +48,9 @@ function ViewApps() {
     //Split based on t
     return finalDate[0];
   }
-
+/** the return statement renders a view of all appointments associated with a particular mechanic and includes information 
+ * like mechanic and user id, date, vehicle make, vehicle model and vehicle description in the render
+ */
   return (
     <div>
       <h2>View Appointments</h2>

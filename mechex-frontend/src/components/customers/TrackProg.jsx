@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Link  } from 'react-router-dom';
 import axios from 'axios';
 import InsightsSharpIcon from '@mui/icons-material/InsightsSharp';
 import AnalyticsOutlinedIcon from '@mui/icons-material/AnalyticsOutlined';
 
 function TrackProg() {
+  //uses the useState hook to define a state variable named appointments and a corresponding setter function named setAppointments.
   const [appointments, setAppointments] = useState([]);
+  // creates a variable called storedUserId and stores the user id stored in the local storage in it 
   const storedUserId = localStorage.getItem('id');
 
+  /** this useffect hook is used here to as a side effect. the function fetchAppointments tries to make a GET request to
+ *  http://localhost:5004/appointments/user/${storedUserId} in order to get the appointments of users associated with a specific user id
+ * when it gets the response.data from the backend it updates it with appoinments with setAppointments */
   useEffect(() => {
-    // Fetch the appointments data from the backend API
     const fetchAppointments = async () => {
       try {
         const response = await axios.get(`http://localhost:5004/appointments/user/${storedUserId}`);
@@ -22,6 +25,9 @@ function TrackProg() {
     fetchAppointments();
   }, [storedUserId]);
 
+  /** the return statement renders a view of all appointments associated with a particular user and includes information 
+ * like appointment id, description, status and mechanic's notes in the render
+ */
   return (
     <div>
     <h2> < InsightsSharpIcon color="primary"/> Track Progress</h2>

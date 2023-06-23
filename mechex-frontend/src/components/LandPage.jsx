@@ -1,21 +1,16 @@
+//imports react, link from react-router-dom and css being applied to it
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/Landpage.css';
-import Icon from '@mui/material/Icon';
 
-
-// Import images/icons
-import logo from '../assets/logo.png';
-import userIcon from '../assets/user.jpg';
-import mechanicIcon from '../assets/mechanc-icon.jpg';
 
 function LandPage() {
+  //the return statement renders a landing page that is syled with css and can navigate to the login and signup components
   return (
     <div className="landing-page">
 
       <div className="content">
         <div className="title">
-          <Icon>star</Icon>
           <h1>Welcome to MechEx!</h1>
         </div>
 
@@ -28,7 +23,7 @@ function LandPage() {
             Login
           </Link>
           <Link to="/signup" className="cta-button">
-          User Signup
+            User Signup
           </Link>
           <Link to="/signups" className="cta-button">
             Mechanic SignUp
@@ -40,18 +35,18 @@ function LandPage() {
         <div className="quote">
           "This platform helped me find the best mechanic in town. Highly recommended!"
           - Ifeoma Oki
-          </div>
-       
+        </div>
+
         <div className="quote">
           "This platform saved me thousands of naira by connecting me to the best mechanic in Lagos!"
           - Olisa Oka
-          </div>
-       
+        </div>
+
         <div className="quote">
           "This platform saved me so much time"
-         - Bode Elliot
-          </div>
-        
+          - Bode Elliot
+        </div>
+
       </div>
 
       <footer className="footer">

@@ -3,18 +3,26 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
- import '/Users/laurennwobbi/mechEx/mechex-frontend/src/assets/Booking.css'
-function Login({ onLogin }) {
+import '/Users/laurennwobbi/mechEx/mechex-frontend/src/assets/Booking.css'
+
+//function login gets a prop (onLogin) that has been passed to it from app.jsx
+ function Login({ onLogin }) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  
+  //defines a variable 'navigate' and puts the react-router-dom function 'useNavigate' inside
   const navigate = useNavigate();
 
+  //function handleSubmit handles when the form rendered in the return stateent below is submitted
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Check if login was successful
     try {
+      /** line 26-28 tries to log users in by making a POST request to the 'http://localhost:5001/login' endpoint using the provided email and password values.
+      Logs the response data to the console.
+      Destructures properties from the response data into variables: success, userType, sessionIdentifier, mechanic_id, and user_id */
       const response = await axios.post('http://localhost:5001/login', { email, password });
       console.log(response.data);
       const {success, userType, sessionIdentifier, mechanic_id, user_id } = response.data;
@@ -22,11 +30,13 @@ function Login({ onLogin }) {
       if (success) {
         // Store the session identifier/token in local storage
         localStorage.setItem('session', sessionIdentifier);
-        // Call the onLogin prop with the session identifier
+        /* Call the onLogin prop with the session identifier, user_id and mechanic_id and log it to check if they are there 
+        (alternatively you can check in the storage part of your browser)*/
         onLogin(sessionIdentifier, user_id, mechanic_id);
         console.log(user_id)
         console.log(mechanic_id)
-        // Login successful, redirect to the appropriate page
+        // if Login successful, redirect to the appropriate page
+        /**line 38-43 is a conditional statement that redirects users to different dashboards based on their usertype(customer/mechanic ) */
         if (userType === 'customer') {
           // Redirect to customer page
           navigate('/dashboard');
@@ -36,6 +46,10 @@ function Login({ onLogin }) {
         }
       } else {
         // Login failed
+        alert ("Login failed, Please check credentials and try again");
+
+        setEmail('');
+        setPassword('');
       }
     } catch (error) {
       console.error('Error during login:', error);
@@ -43,9 +57,8 @@ function Login({ onLogin }) {
     }
   };
 
-
-
   return (
+    //the return statement renders a form for the login with input for email and password <form> calls the handleSubmit function to submit the form
     <div className="form-columnss">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>

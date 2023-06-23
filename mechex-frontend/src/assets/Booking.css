@@ -51,7 +51,7 @@
     /* Styles for the submit button */
   }
   .search-form input, .form-columnss input, 
-  .form-column input {
+  .form-column input, .review-form input {
     width: 300px;
     height: 40px;
     padding: 5px;
@@ -99,6 +99,10 @@
     /* Styles for the submit button */
   }
   
+  .review-button{
+    margin-top: 20px;
+    margin-left: 20px;
+  }
     /*signup*/
     .signup {
       display: flex;

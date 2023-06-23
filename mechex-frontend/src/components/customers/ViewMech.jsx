@@ -1,15 +1,20 @@
+//imports axios that is used to connect to the backend 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import profiles from '/Users/laurennwobbi/mechEx/mechex-frontend/src/assets/profiles.jpg';
+import { Link } from 'react-router-dom';
 
 function ViewMech() {
+      //uses the useState hook to define a state variable and a corresponding setter function .
     const [mechanics, setMechanics] = useState([]);
     const [currentMechanicIndex, setCurrentMechanicIndex] = useState(0);
     const [reviews, setReviews] = useState([]);
     const [name, setName] = useState('')
-    const [newReview, setNewReview] = useState('');
+    const [reviewText, setReviewText] = useState('');
 
-
-
+  /** this useffect hook is used here to as a side effect. the function fetchMechanics tries to make a GET request to
+ *  http://localhost:5003/mechanics in order to get all the Mechanics in the database
+ * when it gets the response.data from the backend it updates the mechanics with setMechanics */
     useEffect(() => {
         const fetchMechanics = async () => {
             try {
@@ -23,10 +28,12 @@ function ViewMech() {
         fetchMechanics();
     }, []);
 
-
+  /** this useffect hook is used here to as a side effect. the function fetchReviews tries to make a GET request to
+ *  http://localhost:5005/reviews/mechanics/${mechanic_id} in order to get the reviews of mechanics associated with a specific mechanic id
+ * when it gets the response.data from the backend it updates the reviews with setReviews */
     useEffect(() => {
-        const fetchReviews = async () => {
-            if (mechanics.length > 0) {
+        const fetchReviews = async () => {//function responsible for fetching reviews for a selected mechanic.
+            if (mechanics.length > 0) { //fetchReviews function is only executed when there are mechanics available
                 try {
                     const mechanic_id = mechanics[currentMechanicIndex]?.id
                     console.log(mechanic_id)
@@ -45,6 +52,8 @@ function ViewMech() {
         fetchReviews();
     }, [currentMechanicIndex, mechanics]);
 
+    /**the navigateNextMechanic and navigatePreviousMechanic function is responsible for navigating to the next or previous mechanic in the mechanics array.
+It uses the setCurrentMechanicIndex setter function for updating the currentMechanicIndex state variable. */
     const navigateNextMechanic = () => {
         setCurrentMechanicIndex((prevIndex) => (prevIndex + 1) % mechanics.length);
     };
@@ -54,26 +63,35 @@ function ViewMech() {
             prevIndex === 0 ? mechanics.length - 1 : prevIndex - 1
         );
     };
+       
+    //function createReview creates new reviews when the review form is submitted 
     const createReview = async (mechanicId) => {
+        /* tries Send a POST request to http://localhost:5005/reviews your backend API endpoint. second part is an object that represents the data 
+      to be sent with the request.*/
         try {
             const response = await axios.post('http://localhost:5005/reviews', {
                 mechanicId,
                 name,
-                review: newReview,
+                reviewText,
             });
+            //resets state variables 
             setName('');
-            setNewReview('');
-            // You can handle the success response as needed
+            setReviewText('');
+           
+            //  logs the success response as needed
             console.log(response.data);
         } catch (error) {
             console.log(error);
-            // You can handle the error response as needed
+            //  can handle the error response as needed
         }
     };
 
+    /** the return statement renders all the mechanics in the databse, the way it is rendered depends on the css associated with it. 
+     * below the rendered mechanics is a list of reviews associated with the particular mechanic being rendered at the time along with a 
+     * small form to submit new mechanic reviews  */
     return (
         <div>
-            <h2>View Mechanics</h2>
+            <Link to="/dashboard"> Back to Dashboard</Link>
             {mechanics.length > 0 && (
                 <div className="mechanic-window">
                     <div className="arrow left" onClick={navigatePreviousMechanic}>
@@ -81,6 +99,7 @@ function ViewMech() {
                     </div>
                     <div key={mechanics[currentMechanicIndex].id} className="appointments-card">
                         <div className='mechanics'>
+                            <div> <img src={profiles} alt="Profile" /> </div>
                             <div>{mechanics[currentMechanicIndex].name}</div>
                             <div>{mechanics[currentMechanicIndex].phone}</div>
                             <div>{mechanics[currentMechanicIndex].email}</div>
@@ -88,27 +107,31 @@ function ViewMech() {
                             <div>{mechanics[currentMechanicIndex].city}</div>
                         </div>
                         <div className="review-section">
-                            <h3>Reviews:</h3>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Review</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {reviews.map((review) => (
-                                        <tr key={review.id}>
-                                            <td>{review.name}</td>
-                                            <td>{review.review}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                            <div>
+                            <div className='viewreviews'>
+                                <h3>Reviews:</h3>
+                                <div className='reviews-container'>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Review</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {reviews.map((review) => (
+                                                <tr key={review.id}>
+                                                    <td>{review.name}</td>
+                                                    <td>{review.reviewText}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div className='review-form'>
                                 <form>
                                     <div >
-                                        <label htmlFor="name">    Name</label>
+                                        <label htmlFor="name">    Name </label>
                                         <input
                                             type="name"
                                             id="name"
@@ -118,18 +141,18 @@ function ViewMech() {
                                         />
                                     </div>
                                     <div >
-                                        <label htmlFor="reviews">    Review</label>
+                                        <label htmlFor="reviews">    Review  </label>
                                         <input
                                             type="review"
                                             id="review"
                                             placeholder='review'
-                                            value={newReview}
-                                            onChange={(e) => setNewReview(e.target.value)}
+                                            value={reviewText}
+                                            onChange={(e) => setReviewText(e.target.value)}
                                         />
                                     </div>
                                 </form>
 
-                                <button onClick={() => createReview(mechanics[currentMechanicIndex].id)}>
+                                <button className="review-button" onClick={() => createReview(mechanics[currentMechanicIndex].id)}>
                                     Submit Review
                                 </button>
                             </div>

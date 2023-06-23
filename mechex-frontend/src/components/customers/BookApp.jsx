@@ -1,10 +1,13 @@
+// this component allows users to book their appointments
+//imports axios that is used to connect to the backend 
 import { useNavigate, Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import axios from 'axios';
 import '/Users/laurennwobbi/mechEx/mechex-frontend/src/assets/Booking.css'
 
-
+//user_id is passed as a prop from app.jsx
 function BookApp({ user_id }) {
+  //uses the useState hook to define a state variable and a corresponding setter function .
   //const [user, setUser] = useState('');
   const [mechanics, setMechanics] = useState([]);
   const [city, setCity] = useState('');
@@ -17,7 +20,9 @@ function BookApp({ user_id }) {
   const navigate = useNavigate()
 
   //const [user_id, setUser_Id] = useState(""); // Store the logged-in user ID here
-
+  /** line 26-34 the function handleSearch attempts to make an GET request to http://localhost:5003/mechanics/${city}
+   * which handles the searching of mechanics with a particular city that has been inputted in the form
+   */
   const handleSearch = async () => {
     try {
       const response = await axios.get(`http://localhost:5003/mechanics/${city}`);
@@ -33,23 +38,25 @@ function BookApp({ user_id }) {
     console.log(e.target.value);
   }
 
+  //function handleSubmit handles when the form rendered in the return statement below is submitted
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(user_id)
 
+    //if a user_id is not present an aloert message is shown and redirects users to the log in page
     if (!user_id) {
       alert('Please log in to create an appointment');
+      navigate('/login')
       return;
     }
-    //const mechanic_id = selectedMechanic;
+
     // Retrieve the selected mechanic's information and continue with form submission
     if (selectedMechanic) {
       e.preventDefault();
 
       try {
-        // Perform signup logic here
-        // You can use the username, password, email, and phone values
-        // Send a POST request to your backend API endpoint
+        /* tries Send a POST request to http://localhost:5004/appointments your backend API endpoint. second part is an object that represents the data 
+       to be sent with the request.*/
 
         const response = await axios.post('http://localhost:5004/appointments', {
           user_id: user_id,
@@ -62,7 +69,7 @@ function BookApp({ user_id }) {
 
         });
 
-        // Handle the response from the backend as needed
+        // logs the response from the backend as needed
         console.log(response.data);
 
         // Reset form fields after successful signup
@@ -76,6 +83,7 @@ function BookApp({ user_id }) {
         setVehicle_Description('');
         //setUser_Id('');
 
+        //navigates users back to view appointments
         navigate('/appointments');
       } catch (error) {
         // Handle any errors that occurred during the signup process
@@ -86,6 +94,8 @@ function BookApp({ user_id }) {
       // Handle the case when no mechanic is selected
     }
   };
+
+  //the return statement renders the signup form where users input data which will be set in the state variable using the setters
   return (
     <div>
       <div className="booking-app">
@@ -137,7 +147,6 @@ function BookApp({ user_id }) {
                   <label htmlFor="vehicle_model">Vehicle Model: </label>
                   <input type="text" id="vehicle_model" value={vehicle_model} placeholder='Camry' onChange={(e) => setVehicle_Model(e.target.value)} />
                 </div>
-                {/* Add form fields for the first column */}
               </div>
               <div className="form-column">
                 <div>
@@ -148,14 +157,12 @@ function BookApp({ user_id }) {
                   <label htmlFor="vehicle_description">Vehicle Description: </label>
                   <input type="text" id="vehicle_description" value={vehicle_description} placeholder='Oil change needed' onChange={(e) => setVehicle_Description(e.target.value)} />
                 </div>
-                {/* Add form fields for the second column */}
               </div>
             </div>
 
-            {/* Submit button */}
             <div className="submit-button">
               <button type="submit" >Book Appointment </button>
-              {/* Add your submit button here */}
+
             </div>
           </div>
 

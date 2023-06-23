@@ -1,10 +1,13 @@
+/*imports the sidebar component so that it can be rendered beside the contact us component for the purpose of 
+continuity within the platform and easy navigation*/
 import React from "react"
 import Sidebar from "./Sidebar"
 
 
 function ContactUs() {
-    return (
-        <div className="contact-us-container">
+    //the return statement renders a contact us that is syled with css
+  return (
+    <div className="contact-us-container">
       <Sidebar />
       <section className="contact-us-section">
         <h2>Contact Us</h2>
@@ -21,6 +24,6 @@ function ContactUs() {
         </div>
       </section>
     </div>
-    )
+  )
 }
 export default ContactUs

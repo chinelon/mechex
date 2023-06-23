@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
+//imports necessary components from the @react-google-maps/api library.
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 
 function Map() {
+  //The mapContainerStyle object defines the width and height of the map container
   const mapContainerStyle = {
     width: '100%',
     height: '800px',
   };
-
+//The center object defines the latitude and longitude coordinates of the center point of the map.
   const center = {
     lat: 6.5244, // Lagos latitude
     lng: 3.3792, // Lagos longitude
   };
 
+//The mechanics array stores different mechanics with their respective latitude, longitude, and name.
   const mechanics = [
     { lat: 6.5244, lng: 3.3792, name: 'Mechanic 6' },
     { lat: 6.48045, lng: 3.35098, name: 'Oyingbo Mechanic Village' },
@@ -24,16 +27,20 @@ function Map() {
     { lat: 6.5245, lng: 3.3792, name: 'Mechanic 1' },
     { lat: 6.5246, lng: 3.3792, name: 'Mechanic 2' },
     { lat: 6.5249, lng: 3.3792, name: 'Mechanic 3' },
-    // Add more mechanic objects with their coordinates and names
   ];
+  
+  //The selectedMechanic state variable is used to track the currently selected mechanic.
   const [selectedMechanic, setSelectedMechanic] = useState(null);
 
+ // The map state variable is used to hold the reference to the Google Map instance.
   const [map, setMap] = useState(null);
 
+  // onLoad function is called when the Google Map component is loaded and sets the map reference in the map state variable.
   const onLoad = (map) => {
     setMap(map);
   };
-
+  
+  //The useEffect hook is used to create markers on the map for each mechanic in the mechanics array. It runs whenever the map or mechanics variables change.
   useEffect(() => {
     if (map) {
       mechanics.forEach((mechanic) => {
@@ -46,6 +53,13 @@ function Map() {
     }
   }, [map, mechanics]);
 
+/**The LoadScript component loads the Google Maps JavaScript library by providing the API key gotten from Google Maps Javascript.
+ * The GoogleMap component renders the actual map with specified container style, center coordinates, and initial zoom level
+ * Inside the GoogleMap component, Marker components are rendered for each mechanic in the mechanics array. 
+ * They are positioned using the mechanic's coordinates and respond to click events to set the selected mechanic.
+ * When a mechanic is selected, an InfoWindow component is rendered at the mechanic's coordinates, showing the mechanic's name. 
+ * Clicking the close button on the info window clears the selected mechanic.
+ */
   return (
     <LoadScript
       googleMapsApiKey="AIzaSyCesJ17qITXGLfr2PLEPUFUwj9o3ie7GhU" // Replace with your actual Google Maps API key

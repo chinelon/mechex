@@ -30,11 +30,11 @@ pool.connect()
 // example route; Define your API endpoints. These are the routes that your client-side code will use to interact with your server and database.
 //creates new review
 reviews.post('/', (req, res) => {
-    const { mechanicId, name, newReview} = req.body;
+    const { mechanicId, name, reviewText} = req.body;
   
     pool.query(
-      'INSERT INTO reviews (mechanic_id, name, review) VALUES ($1, $2, $3)',
-      [mechanicId, name, newReview],
+      'INSERT INTO reviews (mechanic_id, name, reviewText) VALUES ($1, $2, $3)',
+      [mechanicId, name, reviewText],
       (error, result) => {
         if (error) {
           console.log(error);

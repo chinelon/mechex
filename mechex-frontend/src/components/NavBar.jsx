@@ -1,12 +1,12 @@
+/**imports react and a oicture called mechex from the assets folder */
 import { React } from 'react';
-import { Link } from 'react-router-dom';
 import mechex from '../assets/mechex.png';
 
 function Navbar() {
 const handleLogout= () => {
 
 }
-
+/**the return statement renders an image called mechex */
     return (
         <div className='flex-container'>
             <img src={mechex} alt="Jane Smith" />

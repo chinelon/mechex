@@ -1,3 +1,6 @@
+/** importing react from react, link from react router dom that works in navigating between components and icons from Material UI
+ * a React Icon Library
+ */
 import { React, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
@@ -5,7 +8,9 @@ import LightbulbCircleOutlinedIcon from '@mui/icons-material/LightbulbCircleOutl
 import ContactPageOutlinedIcon from '@mui/icons-material/ContactPageOutlined';
 
 function Sidebar() {
-
+/**the return statement renders links to the home, about and contact us component 'Link' uses its predefined path in app.jsx. 
+ * The icons beside it are illustrating what they do like a small house icon
+  */
     return (
         <nav>
             <div className="sidebars">
