@@ -1,17 +1,18 @@
-//requiring the necessary packages at the top of your file:
+//requiring the necessary packages
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors');
 
-// Define routes for the users resource
+// Define routes for the mechanics resource
 const mechanicsRoute = express.Router();
 
+//fixes the error '[Error] Origin http://127.0.0.1:5173 is not allowed by Access-Control-Allow-Origin. Status code: 200'
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//Set up a connection to your database by adding the following code to your index.js file:
+//Set up a connection to database 
 const { Pool } = require('pg');
 const pool = new Pool({
     user: 'postgres',
@@ -21,13 +22,14 @@ const pool = new Pool({
     port: 5432,
 });
 
+//if database is connected exeecute line 24 or else execute line 25
 pool.connect()
     .then(() => console.log('Connected to Postgres database'))
     .catch(err => console.error('Failed to connect to Postgres database', err.stack));
 
 
-
-// example route; Define your API endpoints. These are the routes that your client-side code will use to interact with your server and database.
+//API Endpoints
+//this endpoint gets all mechanics from the database
 mechanicsRoute.get('/', (req, res) => {
     pool.query('SELECT * FROM public.mechanics ORDER BY id ASC', (error, results) => {
         if (error) {
@@ -39,27 +41,9 @@ mechanicsRoute.get('/', (req, res) => {
     });
 });
 
-
-/*
-//gets/searches for mechanics based on their address
-mechanicsRoute.get('/api/mechanics', async (req, res) => {
-    const { address } = req.query;
-  
-    try {
-      // Query the database for mechanics with a matching address
-      const mechanics = await Mechanic.find({ address });
-      res.json(mechanics);
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  });*/
   
 //get mechanics by their city
   mechanicsRoute.get('/:city', (req, res) => {
-    /* const mechanicId = req.params.id;
-      code to retrieve a user by ID from the database
-     res.send(`This is the response for GET /users/${userId}`);*/
      const city = req.params.city
         console.log(city)
  
@@ -73,12 +57,10 @@ mechanicsRoute.get('/api/mechanics', async (req, res) => {
       });
       
  
- });  
-// GET /users/:id - Get a user by ID
+ }); 
+
+//this endpoint gets a mechanic by their ID
 mechanicsRoute.get('/:id', (req, res) => {
-   /* const mechanicId = req.params.id;
-     code to retrieve a user by ID from the database
-    res.send(`This is the response for GET /users/${userId}`);*/
     const id = parseInt(req.params.id)
 
     pool.query('SELECT * FROM public.mechanics WHERE id = $1', [id], (error, results) => {
@@ -91,10 +73,9 @@ mechanicsRoute.get('/:id', (req, res) => {
 
 });
 
-// POST /users - Create a new user to be deleted
+//this endpoint creates a new mechanic 
 mechanicsRoute.post('/signups', (req, res) => {
-    /* Your code to create a new user in the database
-    res.send('This is the response for POST /users');*/
+    
     const { name, phone, email, address, city, password, user_type } = req.body
     console.log(name, phone, email, address, password);
 
@@ -107,11 +88,8 @@ mechanicsRoute.post('/signups', (req, res) => {
     });
 });
 
-// PUT /users/:id - Update a user by ID
+// Updates a mechanic by ID
 mechanicsRoute.put('/:id', (req, res) => {
-    /*const userId = req.params.id;
-      Your code to update a user by ID in the database
-     res.send(`This is the response for PUT /users/${userId}`);*/
     const id = parseInt(req.params.id)
     const { name, phone, email, address, city, user_type } = req.body
 
@@ -127,11 +105,8 @@ mechanicsRoute.put('/:id', (req, res) => {
     );
 });
 
-// DELETE /users/:id - Delete a user by ID
+//Deletes a user by ID
 mechanicsRoute.delete('/:id', (req, res) => {
-    /*const userId = req.params.id;
-    // Your code to delete a user by ID from the database
-    res.send(`This is the response for DELETE /users/${userId}`);*/
     const id = parseInt(req.params.id)
 
     pool.query('DELETE FROM public.mechanics WHERE id = $1', [id], (error, results) => {
@@ -144,7 +119,7 @@ mechanicsRoute.delete('/:id', (req, res) => {
 
 module.exports = mechanicsRoute;
 
-// Add the users router to the app
+// Add the mechanic router to the app
 app.use('/mechanics', mechanicsRoute);
 
 const PORT = process.env.PORT || 5003;

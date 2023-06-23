@@ -1,17 +1,17 @@
-//requiring the necessary packages at the top of your file:
+//requiring the necessary packages
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors');
 
-// Define routes for the users resource
+// Define routes for the appointemnts resource
 const appointmentsRoute = express.Router();
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//Set up a connection to your database by adding the following code to your index.js file:
+//Set up a connection to database
 const { Pool } = require('pg');
 const pool = new Pool({
     user: 'postgres',
@@ -21,14 +21,14 @@ const pool = new Pool({
     port: 5432,
 });
 
+//if database is connected exeecute line 24 or else execute line 25
 pool.connect()
     .then(() => console.log('Connected to Postgres database'))
     .catch(err => console.error('Failed to connect to Postgres database', err.stack));
 
-// example route; Define your API endpoints. These are the routes that your client-side code will use to interact with your server and database.
+//API Endpoints
+//this endpoint gets all appointments from the database
 appointmentsRoute.get('/', (req, res) => {
-    /* Your code to retrieve all users from the database
-    res.send('This is the response for GET /users');*/
     pool.query('SELECT * FROM public.appointments ORDER BY id ASC', (error, results) => {
         if (error) {
             console.log(error)
@@ -38,11 +38,8 @@ appointmentsRoute.get('/', (req, res) => {
     });
 });
 
-// GET /users/:id - Get a user by ID
+//Get an appointment by ID from the database
 appointmentsRoute.get('/:id', (req, res) => {
-    /* const mechanicId = req.params.id;
-      code to retrieve a user by ID from the database
-     res.send(`This is the response for GET /users/${userId}`);*/
     const id = parseInt(req.params.id)
 
     pool.query('SELECT * FROM public.appointments WHERE id = $1', [id], (error, results) => {
@@ -55,10 +52,8 @@ appointmentsRoute.get('/:id', (req, res) => {
 
 });
 
-// POST /users - Create a new appointment
+//Creatse a new appointment
 appointmentsRoute.post('/', (req, res) => {
-    /* Your code to create a new appointment in the database
-    res.send('This is the response for POST /users');*/
     const { user_id, mechanic_id, appointment_date, vehicle_make, vehicle_model, vehicle_year, vehicle_description } = req.body
 
     pool.query('INSERT INTO public.appointments (user_id, mechanic_id, appointment_date, vehicle_make, vehicle_model, vehicle_year, vehicle_description) VALUES ($1, $2, $3, $4, $5, $6, $7 ) RETURNING *', [user_id, mechanic_id, appointment_date, vehicle_make, vehicle_model, vehicle_year, vehicle_description], (error, results) => {
@@ -72,14 +67,10 @@ appointmentsRoute.post('/', (req, res) => {
         }
     });
 });
+
 //gets appointments based on the stored userid
 appointmentsRoute.get('/user/:storedUserId', (req, res) => {
-    /* const mechanicId = req.params.id;
-      code to retrieve a user by ID from the database
-     res.send(`This is the response for GET /users/${userId}`);*/
-     const storedUserId = parseInt(req.params.storedUserId)
-       // console.log(userId)
- 
+     const storedUserId = parseInt(req.params.storedUserId) 
      pool.query('SELECT * FROM public.appointments WHERE "user_id" = $1', [storedUserId], (error, results) => {
         if (error) {
           console.log(error);
@@ -92,12 +83,9 @@ appointmentsRoute.get('/user/:storedUserId', (req, res) => {
  
  });
  
+ //gets appointments based on the stored userid
  appointmentsRoute.get('/mechanic/:storedMechanicId', (req, res) => {
-    /* const mechanicId = req.params.id;
-      code to retrieve a user by ID from the database
-     res.send(`This is the response for GET /users/${userId}`);*/
      const storedMechanicId = parseInt(req.params.storedMechanicId)
-       // console.log(userId)
  
      pool.query('SELECT * FROM public.appointments WHERE "mechanic_id" = $1', [storedMechanicId], (error, results) => {
         if (error) {
@@ -111,11 +99,11 @@ appointmentsRoute.get('/user/:storedUserId', (req, res) => {
  
  }); 
 
+ // API endpoint to update the appointment progress and notes in the database
  appointmentsRoute.put('/:appointment_id', (req, res) => {
     const appointment_id = parseInt(req.params.appointment_id);
     const { status, notes } = req.body;
   
-    // Your code to update the appointment progress and notes in the database
     pool.query(
       'UPDATE public.appointments SET status = $1, notes = $2 WHERE id = $3',
       [status, notes, appointment_id],
@@ -130,11 +118,8 @@ appointmentsRoute.get('/user/:storedUserId', (req, res) => {
     );
   });
   
-// PUT /users/:id - Update a user by ID
+//Update an appointment by ID
 appointmentsRoute.put('/:id', (req, res) => {
-    /*const userId = req.params.id;
-      Your code to update a user by ID in the database
-     res.send(`This is the response for PUT /users/${userId}`);*/
     const id = parseInt(req.params.id)
     const { appointment_date, vehicle_make, vehicle_model, vehicle_year, vehicle_description } = req.body
 
@@ -150,11 +135,8 @@ appointmentsRoute.put('/:id', (req, res) => {
     );
 });
 
-// DELETE /users/:id - Delete a user by ID
+// Deletes an appointment by ID
 appointmentsRoute.delete('/:id', (req, res) => {
-    /*const userId = req.params.id;
-    // Your code to delete a user by ID from the database
-    res.send(`This is the response for DELETE /users/${userId}`);*/
     const id = parseInt(req.params.id)
 
     pool.query('DELETE FROM public.appointments WHERE id = $1', [id], (error, results) => {
@@ -167,7 +149,7 @@ appointmentsRoute.delete('/:id', (req, res) => {
 
 module.exports = appointmentsRoute;
 
-// Add the users router to the app
+// Add the appointments router to the app
 app.use('/appointments', appointmentsRoute);
 
 const PORT = process.env.PORT || 5004;
