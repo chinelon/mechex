@@ -129,10 +129,8 @@ function BookApp({ user_id }) {
                   </select>
                 </div>
               )}
-              {/* Add your search form fields here */}
             </div>
 
-            {/* Additional form fields in two columns */}
             <div className="form-columns">
               <div className="form-column">
                 <div>

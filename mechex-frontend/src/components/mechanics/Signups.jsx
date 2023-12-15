@@ -48,8 +48,9 @@ function Signups() {
       setPassword('');
       setUserType('');
       
+      alert('login to verify account')
       //navigates to the mechanics dashboard
-      navigate('/dashboards');
+      navigate('/login');
     } catch (error) {
       alert ('check credentials and try again');
       navigate('/signups')

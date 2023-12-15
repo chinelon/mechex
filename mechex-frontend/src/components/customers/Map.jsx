@@ -14,7 +14,7 @@ function Map() {
     lng: 3.3792, // Lagos longitude
   };
 
-//The mechanics array stores different mechanics with their respective latitude, longitude, and name.
+//The mechanics array stores different mechanics with their  latitude, longitude, and name.
   const mechanics = [
     { lat: 6.5244, lng: 3.3792, name: 'Mechanic 6' },
     { lat: 6.48045, lng: 3.35098, name: 'Oyingbo Mechanic Village' },
@@ -32,7 +32,7 @@ function Map() {
   //The selectedMechanic state variable is used to track the currently selected mechanic.
   const [selectedMechanic, setSelectedMechanic] = useState(null);
 
- // The map state variable is used to hold the reference to the Google Map instance.
+
   const [map, setMap] = useState(null);
 
   // onLoad function is called when the Google Map component is loaded and sets the map reference in the map state variable.
@@ -53,12 +53,10 @@ function Map() {
     }
   }, [map, mechanics]);
 
-/**The LoadScript component loads the Google Maps JavaScript library by providing the API key gotten from Google Maps Javascript.
- * The GoogleMap component renders the actual map with specified container style, center coordinates, and initial zoom level
+/**The LoadScript component loads the Google Maps JavaScript library by providing the API key
+ * The GoogleMap component renders the map with container style, center coordinates, and initial zoom level
  * Inside the GoogleMap component, Marker components are rendered for each mechanic in the mechanics array. 
- * They are positioned using the mechanic's coordinates and respond to click events to set the selected mechanic.
- * When a mechanic is selected, an InfoWindow component is rendered at the mechanic's coordinates, showing the mechanic's name. 
- * Clicking the close button on the info window clears the selected mechanic.
+ * They are positioned using the mechanic's coordinates
  */
   return (
     <LoadScript
@@ -79,14 +77,6 @@ function Map() {
           />
         ))}
 
-        {selectedMechanic && (
-          <InfoWindow
-            position={{ lat: selectedMechanic.lat, lng: selectedMechanic.lng }}
-            onCloseClick={() => setSelectedMechanic(null)}
-          >
-            <div>{selectedMechanic.name}</div>
-          </InfoWindow>
-        )}
       </GoogleMap>
 
 

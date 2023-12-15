@@ -32,8 +32,7 @@ pool.connect()
 reviews.post('/', (req, res) => {
     const { mechanicId, name, reviewText} = req.body;
   
-    pool.query(
-      'INSERT INTO reviews (mechanic_id, name, reviewText) VALUES ($1, $2, $3)',
+    pool.query('INSERT INTO public.reviews (mechanic_id, name, reviewText) VALUES ($1, $2, $3) RETURNING *',
       [mechanicId, name, reviewText],
       (error, result) => {
         if (error) {

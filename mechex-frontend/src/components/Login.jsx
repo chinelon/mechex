@@ -47,7 +47,8 @@ import '/Users/laurennwobbi/mechEx/mechex-frontend/src/assets/Booking.css'
       } else {
         // Login failed
         alert ("Login failed, Please check credentials and try again");
-
+  
+        //resets state variables to null
         setEmail('');
         setPassword('');
       }

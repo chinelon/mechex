@@ -32,6 +32,7 @@ function ViewApp() {
     fetchAppointments();
   }, [storedUserId]);
 
+  
   /*the creation of the function in line 40-47 arose from complications associated with how the date of the appointments were being rendered. 
 the date was being rendered along with the time the split function was used to split the output from T (which is where the time started) and 
 return the first part of the result whic is our date*/

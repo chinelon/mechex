@@ -42,8 +42,9 @@ function Signup() {
             setPhone('');
             setUserType('');
      
+            alert('login to verify account')
             //navigates to the customers dashboard
-            navigate('/dashboard');
+            navigate('/login');
         } catch (error) {
             // Handle any errors that occurred during the signup process
             console.error(error);
