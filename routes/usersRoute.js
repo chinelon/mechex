@@ -102,7 +102,7 @@ module.exports =
 // Add the users router to the app
 app.use('/users', usersRoute);
 
-const PORT = process.env.PORT || 5002;
+const PORT = process.env.PORT ;
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
