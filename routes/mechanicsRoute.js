@@ -122,7 +122,7 @@ module.exports = mechanicsRoute;
 // Add the mechanic router to the app
 app.use('/mechanics', mechanicsRoute);
 
-const PORT = process.env.PORT ;
+const PORT = process.env.PORT || 5003;
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);

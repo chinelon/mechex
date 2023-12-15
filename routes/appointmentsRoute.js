@@ -152,7 +152,7 @@ module.exports = appointmentsRoute;
 // Add the appointments router to the app
 app.use('/appointments', appointmentsRoute);
 
-const PORT = process.env.PORT ;
+const PORT = process.env.PORT || 5004;
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
