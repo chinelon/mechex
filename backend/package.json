@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Chinelo Nwobbi",
@@ -21,6 +22,9 @@
     "path": "^0.12.7",
     "pg": "^8.10.0",
     "uuid": "^9.0.0"
+  },
+  "engines": {
+    "npm": "latest"
   }
   
 }
