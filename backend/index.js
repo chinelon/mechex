@@ -54,9 +54,9 @@ pool.connect()
     .catch(err => console.error('Failed to connect to Postgres database', err.stack));
 
 //api endpoint for landing page
-app.get('/', (req, res) => {
+/*app.get('/', (req, res) => {
     res.send('Landing Page');
-});
+});*/
 
 /**
 When a user or mechanic logs in successfully, a unique session identifier is generated using uuidv4. 
