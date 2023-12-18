@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
 const cors = require('cors');
+const history = require('express-history-api-fallback');
 //uuid4 is used to generate a unique key for our sessionIdentifier 
 const { v4: uuidv4 } = require('uuid');
 
@@ -20,11 +21,23 @@ app.use('/api/appointments', appointmentsRoute);
 const reviews = require('./routes/reviews');
 app.use('/api/reviews', reviews);*/
 
+
+const usersRoute = express.Router();
+const reviews = express.Router();
+const mechanicsRoute = express.Router();
+const appointmentsRoute = express.Router();
+
 /* Middleware is software that lies between an operating system and the applications running on it, and is used to manage network resources and other aspects of the system.*/
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.json());
+app.use(
+  history({
+    // Specify the index file for all routes
+    index: 'index.html',
+  })
+);
 
 //connection to databse is setup 
 const { Pool } = require('pg');
