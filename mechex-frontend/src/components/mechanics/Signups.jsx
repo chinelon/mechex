@@ -26,7 +26,7 @@ function Signups() {
      
       /* tries Send a POST request to http://localhost:5003/mechanics/signups your backend API endpoint. second part is an object that represents the data 
       to be sent with the request.*/
-      const response = await axios.post('http://localhost:5003/mechanics/signups', {
+      const response = await axios.post('http://localhost:5001/mechanics/signups', {
         name,
         phone,
         email,

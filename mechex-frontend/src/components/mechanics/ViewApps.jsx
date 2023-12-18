@@ -25,7 +25,7 @@ function ViewApps() {
     console.log('storedmechanicid',storedMechanicId)
     const fetchAppointments = async () => {
       try {
-        const response = await axios.get(`http://localhost:5004/appointments/mechanic/${storedMechanicId}`);
+        const response = await axios.get(`http://localhost:5001/appointments/mechanic/${storedMechanicId}`);
         setAppointments(response.data);
         console.log(response.data)
       } catch (error) {

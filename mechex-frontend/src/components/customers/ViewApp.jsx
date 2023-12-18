@@ -21,7 +21,7 @@ function ViewApp() {
     console.log(storedUserId)
     const fetchAppointments = async () => {
       try {
-        const response = await axios.get(`http://localhost:5004/appointments/user/${storedUserId}`);
+        const response = await axios.get(`http://localhost:5001/appointments/user/${storedUserId}`);
         setAppointments(response.data);
 
       } catch (error) {

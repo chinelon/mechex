@@ -21,7 +21,7 @@ function FollowUp() {
         console.log('app id', appointment_id)
         const fetchAppointmentDetails = async () => {
             try {
-                const response = await axios.get(`http://localhost:5004/appointments/${appointment_id}`);
+                const response = await axios.get(`http://localhost:5001/appointments/${appointment_id}`);
                 setAppointment(response.data);
             } catch (error) {
                 console.log(error);
@@ -38,7 +38,7 @@ function FollowUp() {
         try {
     /* tries Send a POST request to http://localhost:5004/appointments/${appointment_id} your backend API endpoint. second part is an object 
     that represents the data to be sent with the request.*/
-            const response = await axios.put(`http://localhost:5004/appointments/${appointment_id}`, {
+            const response = await axios.put(`http://localhost:5001/appointments/${appointment_id}`, {
                 status,
                 notes,
                 appointment_id,

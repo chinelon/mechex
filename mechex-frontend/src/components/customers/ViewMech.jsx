@@ -18,7 +18,7 @@ function ViewMech() {
     useEffect(() => {
         const fetchMechanics = async () => {
             try {
-                const response = await axios.get('http://localhost:5003/mechanics/');
+                const response = await axios.get('http://localhost:5001/mechanics/');
                 setMechanics(response.data);
             } catch (error) {
                 console.log(error);
@@ -38,7 +38,7 @@ function ViewMech() {
                     const mechanic_id = mechanics[currentMechanicIndex]?.id
                     console.log(mechanic_id)
                     if (mechanic_id) {
-                        const response = await axios.get(`http://localhost:5005/reviews/mechanics/${mechanic_id}`);
+                        const response = await axios.get(`http://localhost:5001/reviews/mechanics/${mechanic_id}`);
                         setReviews(response.data);
                     } else
                         console.log('no mechanicid')
@@ -69,7 +69,7 @@ It uses the setCurrentMechanicIndex setter function for updating the currentMech
         /* tries Send a POST request to http://localhost:5005/reviews your backend API endpoint. second part is an object that represents the data 
       to be sent with the request.*/
         try {
-            const response = await axios.post('http://localhost:5005/reviews', {
+            const response = await axios.post('http://localhost:5001/reviews', {
                 mechanicId,
                 name,
                 reviewText,

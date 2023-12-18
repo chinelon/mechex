@@ -25,7 +25,7 @@ function BookApp({ user_id }) {
    */
   const handleSearch = async () => {
     try {
-      const response = await axios.get(`http://localhost:5003/mechanics/${city}`);
+      const response = await axios.get(`http://localhost:5001/mechanics/${city}`);
       const mechanicsData = response.data;
       setMechanics(mechanicsData);
     } catch (error) {
@@ -58,7 +58,7 @@ function BookApp({ user_id }) {
         /* tries Send a POST request to http://localhost:5004/appointments your backend API endpoint. second part is an object that represents the data 
        to be sent with the request.*/
 
-        const response = await axios.post('http://localhost:5004/appointments', {
+        const response = await axios.post('http://localhost:5001/appointments', {
           user_id: user_id,
           mechanic_id: selectedMechanic,
           appointment_date,
