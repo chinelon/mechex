@@ -8,7 +8,7 @@ const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 
 //importing routers in index.js
-const usersRoute = require('./routes/usersRoute');
+/*const usersRoute = require('./routes/usersRoute');
 app.use('/api/users', usersRoute);
 
 const mechanicsRoute = require('./routes/mechanicsRoute');
@@ -18,7 +18,7 @@ const appointmentsRoute = require('./routes/appointmentsRoute');
 app.use('/api/appointments', appointmentsRoute);
 
 const reviews = require('./routes/reviews');
-app.use('/api/reviews', reviews);
+app.use('/api/reviews', reviews);*/
 
 /* Middleware is software that lies between an operating system and the applications running on it, and is used to manage network resources and other aspects of the system.*/
 app.use(bodyParser.json());

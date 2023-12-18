@@ -1,5 +1,5 @@
 //requiring the necessary packages
-const express = require('express');
+/*const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors');
@@ -113,7 +113,7 @@ appointmentsRoute.get('/user/:storedUserId', (req, res) => {
           return res.status(500).json({ error: 'An error occurred while updating appointment progress' });
         }
         console.log('Received data:', {  status, notes });
-        res.status(200).json(/*{ success: true, message: 'Appointment progress and notes updated successfully' },*/ `Mechanic modified with ID: ${appointment_id}`);
+        res.status(200).json(`Mechanic modified with ID: ${appointment_id}`); //{ success: true, message: 'Appointment progress and notes updated successfully' }, 
       }
     );
   });
@@ -157,3 +157,4 @@ const PORT = process.env.PORT || 5004;
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 });
+*/
