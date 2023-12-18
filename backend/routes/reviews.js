@@ -1,5 +1,5 @@
 //requiring the necessary packages at the top of your file:
-const express = require('express');
+/*const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors');
@@ -29,46 +29,7 @@ pool.connect()
 
 
 //this endpoint creates a new review
-reviews.post('/', (req, res) => {
-    const { mechanicId, name, reviewText} = req.body;
-  
-    pool.query('INSERT INTO public.reviews (mechanic_id, name, reviewText) VALUES ($1, $2, $3) RETURNING *',
-      [mechanicId, name, reviewText],
-      (error, result) => {
-        if (error) {
-          console.log(error);
-          res.status(500).json({ error: 'An error occurred while creating the review' });
-        } else {
-          res.status(201).json({ message: 'Review created successfully' });
-        }
-      }
-    );
-  });
-  
 
-// GETs all reviews for a specific mechanic
-reviews.get('/mechanics/:mechanic_id', (req, res) => {
-    const mechanic_id = parseInt(req.params.mechanic_id)
-  
-    pool.query(
-      'SELECT * FROM public.reviews WHERE mechanic_id = $1',
-      [mechanic_id],
-      (error, result) => {
-        if (error) {
-          console.log(error);
-          res.status(500).json({ error: 'An error occurred while fetching the reviews' , error});
-        } else {
-          res.status(200).json(result.rows);
-        }
-      }
-    );
-});
-
- 
-module.exports = reviews;
-
-// Add the users router to the app
-app.use('/reviews', reviews);
 
 /*const PORT = process.env.PORT || 5005;
 
