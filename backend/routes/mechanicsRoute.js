@@ -1,5 +1,5 @@
 //requiring the necessary packages
-/*const express = require('express');
+const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors');
@@ -122,7 +122,7 @@ module.exports = mechanicsRoute;
 // Add the mechanic router to the app
 app.use('/mechanics', mechanicsRoute);
 
-const PORT = process.env.PORT || 5003;
+/*const PORT = process.env.PORT || 5003;
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);

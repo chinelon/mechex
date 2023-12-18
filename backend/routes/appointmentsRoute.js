@@ -1,5 +1,5 @@
 //requiring the necessary packages
-/*const express = require('express');
+const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors');
@@ -152,9 +152,8 @@ module.exports = appointmentsRoute;
 // Add the appointments router to the app
 app.use('/appointments', appointmentsRoute);
 
-const PORT = process.env.PORT || 5004;
+/*const PORT = process.env.PORT || 5004;
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
-});
-*/
+});*/
