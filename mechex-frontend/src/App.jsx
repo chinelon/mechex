@@ -89,10 +89,9 @@ function App() {
     <SessionContext.Provider value={{ session, handleLogout }}>
       <Router>
         <div className="App">
-          <Navbar />
+          <LandPage />
           
           <Routes>
-            <Route path="/" element={<LandPage />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/login" element={<Login onLogin={handleLogin} />} />
