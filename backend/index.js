@@ -32,7 +32,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.json());
 
-
 //connection to databse is setup 
 const { Pool } = require('pg');
 const pool = new Pool({
