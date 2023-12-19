@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
 const cors = require('cors');
-const history = require('express-history-api-fallback');
 //uuid4 is used to generate a unique key for our sessionIdentifier 
 const { v4: uuidv4 } = require('uuid');
 
@@ -32,12 +31,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.json());
-app.use(
-  history({
-    // Specify the index file for all routes
-    index: 'index.html',
-  })
-);
+
 
 //connection to databse is setup 
 const { Pool } = require('pg');
@@ -54,9 +48,9 @@ pool.connect()
     .catch(err => console.error('Failed to connect to Postgres database', err.stack));
 
 //api endpoint for landing page
-/*app.get('/', (req, res) => {
+app.get('/', (req, res) => {
     res.send('Landing Page');
-});*/
+});
 
 /**
 When a user or mechanic logs in successfully, a unique session identifier is generated using uuidv4. 
